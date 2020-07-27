@@ -1,0 +1,1073 @@
+[
+  {
+    "index": 0,
+    "name": "公共分类",
+    "desc": "公共分类",
+    "add_time": 1586686494,
+    "up_time": 1586686494,
+    "list": [
+      {
+        "query_path": {
+          "path": "/apollo/user/getUsers",
+          "params": []
+        },
+        "edit_uid": 0,
+        "status": "undone",
+        "type": "static",
+        "req_body_is_json_schema": true,
+        "res_body_is_json_schema": true,
+        "api_opened": false,
+        "index": 0,
+        "tag": [],
+        "_id": 3486,
+        "method": "GET",
+        "catid": 881,
+        "title": "分页获取所有用户",
+        "path": "/apollo/user/getUsers",
+        "project_id": 275,
+        "req_params": [],
+        "res_body_type": "json",
+        "uid": 383,
+        "add_time": 1589358993,
+        "up_time": 1589359142,
+        "req_query": [
+          {
+            "required": "0",
+            "_id": "5ebbb22613c9d518af201c73",
+            "name": "pageNo",
+            "example": "页数",
+            "desc": "页面"
+          },
+          {
+            "required": "0",
+            "_id": "5ebbb22613c9d518af201c72",
+            "name": "pageSize",
+            "example": "页面大小",
+            "desc": "页面大小"
+          }
+        ],
+        "req_headers": [],
+        "req_body_form": [],
+        "__v": 0,
+        "desc": "",
+        "markdown": "",
+        "res_body": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"resultCode\":{\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"string\"},\"cnMsg\":{\"type\":\"string\"},\"enMsg\":{\"type\":\"string\"}}},\"result\":{\"type\":\"object\",\"properties\":{\"totalCount\":{\"type\":\"number\"},\"pageSize\":{\"type\":\"number\"},\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\"},\"tel\":{\"type\":\"string\"},\"realName\":{\"type\":\"string\"},\"email\":{\"type\":\"null\"}},\"required\":[\"id\",\"tel\",\"realName\",\"email\"]}}}}}}"
+      },
+      {
+        "query_path": {
+          "path": "/apollo/user/fuzzyQueryUsers",
+          "params": []
+        },
+        "edit_uid": 0,
+        "status": "undone",
+        "type": "static",
+        "req_body_is_json_schema": true,
+        "res_body_is_json_schema": true,
+        "api_opened": false,
+        "index": 0,
+        "tag": [],
+        "_id": 3487,
+        "method": "GET",
+        "catid": 881,
+        "title": "模糊查询用户",
+        "path": "/apollo/user/fuzzyQueryUsers",
+        "project_id": 275,
+        "req_params": [],
+        "res_body_type": "json",
+        "uid": 383,
+        "add_time": 1589359661,
+        "up_time": 1589360355,
+        "req_query": [
+          {
+            "required": "1",
+            "_id": "5ebbb6e313c9d518af201c76",
+            "name": "name",
+            "example": "名字",
+            "desc": "姓名"
+          },
+          {
+            "required": "0",
+            "_id": "5ebbb6e313c9d518af201c75",
+            "name": "pageNo",
+            "example": "页数",
+            "desc": "当前页数"
+          },
+          {
+            "required": "0",
+            "_id": "5ebbb6e313c9d518af201c74",
+            "name": "pageSize",
+            "example": "数据大小",
+            "desc": ""
+          }
+        ],
+        "req_headers": [],
+        "req_body_form": [],
+        "__v": 0,
+        "desc": "",
+        "markdown": "",
+        "res_body": "{\"type\":\"object\",\"title\":\"empty object\",\"properties\":{}}"
+      },
+      {
+        "query_path": {
+          "path": "/user/verifyCipher",
+          "params": []
+        },
+        "edit_uid": 0,
+        "status": "undone",
+        "type": "static",
+        "req_body_is_json_schema": true,
+        "res_body_is_json_schema": true,
+        "api_opened": false,
+        "index": 0,
+        "tag": [],
+        "_id": 3499,
+        "method": "POST",
+        "catid": 881,
+        "title": "验证密码",
+        "path": "/user/verifyCipher",
+        "project_id": 275,
+        "req_params": [],
+        "res_body_type": "json",
+        "uid": 383,
+        "add_time": 1589599493,
+        "up_time": 1589783094,
+        "req_query": [
+          {
+            "required": "1",
+            "_id": "5ec22a3613c9d518af201d15",
+            "name": "cipher",
+            "example": "密码",
+            "desc": "Base64后"
+          }
+        ],
+        "req_headers": [
+          {
+            "required": "1",
+            "_id": "5ec22a3613c9d518af201d17",
+            "name": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "required": "1",
+            "_id": "5ec22a3613c9d518af201d16",
+            "name": "X-User-Token",
+            "value": "61d75f761ad64ab0975d72f10af704a1",
+            "example": "61d75f761ad64ab0975d72f10af704a1"
+          }
+        ],
+        "req_body_form": [],
+        "__v": 0,
+        "desc": "",
+        "markdown": "",
+        "res_body": "{\"type\":\"object\",\"title\":\"empty object\",\"properties\":{}}",
+        "req_body_type": "json",
+        "req_body_other": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"cipher\":{\"type\":\"string\"}}}"
+      }
+    ]
+  },
+  {
+    "index": 0,
+    "name": "用户管理相关接口",
+    "desc": null,
+    "add_time": 1586763154,
+    "up_time": 1586763154,
+    "list": [
+      {
+        "query_path": {
+          "path": "/user/downloadTemplate",
+          "params": []
+        },
+        "edit_uid": 0,
+        "status": "undone",
+        "type": "static",
+        "req_body_is_json_schema": true,
+        "res_body_is_json_schema": true,
+        "api_opened": false,
+        "index": 0,
+        "tag": [
+          "用户管理"
+        ],
+        "_id": 3207,
+        "method": "GET",
+        "catid": 893,
+        "title": "下载用户模板",
+        "path": "/user/downloadTemplate",
+        "project_id": 275,
+        "req_params": [],
+        "res_body_type": "json",
+        "req_query": [],
+        "req_headers": [
+          {
+            "required": "1",
+            "_id": "5ebd412e13c9d518af201cb4",
+            "name": "Content-Type",
+            "value": "String",
+            "example": "application/json",
+            "desc": "请求媒体类型"
+          },
+          {
+            "required": "1",
+            "_id": "5ebd412e13c9d518af201cb3",
+            "name": "X-User-Token",
+            "value": "String",
+            "example": "xx",
+            "desc": "用户Token"
+          }
+        ],
+        "req_body_form": [],
+        "desc": "<p>请求样例：</p>\n<p>URL&nbsp; -&nbsp;/apollo/user/downloadTemplate</p>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">请求方法 - GET</span></p>\n<p>Headers -&nbsp;Content-Type=application/json</p>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">返回体 -</span><br>\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\"></span></p>\n<pre><code>字节流 浏览器会直接下载\n</code></pre>\n<p>用户模板 -<br>\n<a href=\"http://wiki.devdemo.trs.net.cn/pages/viewpage.action?pageId=16909215&amp;preview=/16909215/16915163/%E7%94%A8%E6%88%B7%E5%AF%BC%E5%85%A5%E6%A8%A1%E6%9D%BF.xlsx\">http://wiki.devdemo.trs.net.cn/pages/viewpage.action?pageId=16909215&amp;preview=/16909215/16915163/</a>user_template.xlsx</p>\n",
+        "markdown": "请求样例：\n\nURL  - /apollo/user/downloadTemplate\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">请求方法 - GET</span>\n\nHeaders - Content-Type=application/json\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">返回体 -</span>\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\"></span>\n\n```\n字节流 浏览器会直接下载\n```\n\n用户模板 -\n[http://wiki.devdemo.trs.net.cn/pages/viewpage.action?pageId=16909215&preview=/16909215/16915163/](http://wiki.devdemo.trs.net.cn/pages/viewpage.action?pageId=16909215&preview=/16909215/16915163/%E7%94%A8%E6%88%B7%E5%AF%BC%E5%85%A5%E6%A8%A1%E6%9D%BF.xlsx)user_template.xlsx",
+        "res_body": "{\"type\":\"object\",\"title\":\"empty object\",\"properties\":{}}",
+        "uid": 313,
+        "add_time": 1586763157,
+        "up_time": 1589461294,
+        "__v": 0
+      },
+      {
+        "query_path": {
+          "path": "/user/resetMyPassword",
+          "params": []
+        },
+        "edit_uid": 0,
+        "status": "undone",
+        "type": "static",
+        "req_body_is_json_schema": true,
+        "res_body_is_json_schema": true,
+        "api_opened": false,
+        "index": 0,
+        "tag": [
+          "用户管理"
+        ],
+        "_id": 3210,
+        "method": "POST",
+        "catid": 893,
+        "title": "修改当前用户密码",
+        "path": "/user/resetMyPassword",
+        "project_id": 275,
+        "req_params": [],
+        "res_body_type": "json",
+        "req_query": [],
+        "req_headers": [
+          {
+            "required": "1",
+            "_id": "5e956d36a300c3abbb50f740",
+            "name": "Content-Type",
+            "value": "application/json",
+            "example": "application/json",
+            "desc": "内容媒体类型"
+          },
+          {
+            "required": "1",
+            "_id": "5e956d36a300c3abbb50f73f",
+            "name": "X-User-Token",
+            "value": "String",
+            "example": "xxx",
+            "desc": "用户Token"
+          }
+        ],
+        "req_body_form": [],
+        "desc": "<p>请求样例：<br>\nURL&nbsp; -&nbsp; /apollo/user/resetMyPassword</p>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">请求方法 - POST</span><br>\nHeaders -&nbsp;Content-Type=application/json<br>\n&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-&nbsp;X-User-Token=xxxxx</p>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">请求体 -</span></p>\n<pre><code data-language=\"json\" class=\"lang-json\">{\n \"newPassword\": \"xxxx\",\n \"originPassword\": \"xxx\"\n}\n</code></pre>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">返回体 -</span></p>\n<pre><code data-language=\"json\" class=\"lang-json\">\n{\n \"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"密码修改成功\",\n   \"enMsg\": \"success\"\n   },\n \"result\": {\n   \"totalCount\": 0,\n   \"pageSize\": 0,\n \"data\": [{\n   }]\n }\n}\n</code></pre>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">resultCode枚举 -</span></p>\n<pre><code data-language=\"json\" class=\"lang-json\">\"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"密码修改成功\",\n   \"enMsg\": \"success\"\n   },\n   {\n   \"code\": \"00001\",\n   \"cnMsg\": \"\",\n   \"enMsg\": \"\"\n   },\n   {\n   \"code\": \"09999\",\n   \"cnMsg\": \"系统内部错误\",\n   \"enMsg\": \"system error\"\n   },\n   {\n   \"code\": \"09998\",\n   \"cnMsg\": \"网络异常\",\n   \"enMsg\": \"network error\"\n   },\n   {\n   \"code\": \"09997\",\n   \"cnMsg\": \"参数错误\",\n   \"enMsg\": \"params error\"\n   },\n   {\n   \"code\": \"09996\",\n   \"cnMsg\": \"操作失败\",\n   \"enMsg\": \"operate fail\"\n   }\n</code></pre>\n",
+        "markdown": "请求样例：\nURL  -  /apollo/user/resetMyPassword\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">请求方法 - POST</span>\nHeaders - Content-Type=application/json\n               - X-User-Token=xxxxx\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">请求体 -</span>\n\n``` json\n{\n \"newPassword\": \"xxxx\",\n \"originPassword\": \"xxx\"\n}\n```\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">返回体 -</span>\n\n``` json\n\n{\n \"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"密码修改成功\",\n   \"enMsg\": \"success\"\n   },\n \"result\": {\n   \"totalCount\": 0,\n   \"pageSize\": 0,\n \"data\": [{\n   }]\n }\n}\n```\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">resultCode枚举 -</span>\n\n``` json\n\"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"密码修改成功\",\n   \"enMsg\": \"success\"\n   },\n   {\n   \"code\": \"00001\",\n   \"cnMsg\": \"\",\n   \"enMsg\": \"\"\n   },\n   {\n   \"code\": \"09999\",\n   \"cnMsg\": \"系统内部错误\",\n   \"enMsg\": \"system error\"\n   },\n   {\n   \"code\": \"09998\",\n   \"cnMsg\": \"网络异常\",\n   \"enMsg\": \"network error\"\n   },\n   {\n   \"code\": \"09997\",\n   \"cnMsg\": \"参数错误\",\n   \"enMsg\": \"params error\"\n   },\n   {\n   \"code\": \"09996\",\n   \"cnMsg\": \"操作失败\",\n   \"enMsg\": \"operate fail\"\n   }\n```",
+        "req_body_other": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"newPassword\":{\"type\":\"string\",\"description\":\"新密码 base64加密\",\"mock\":{\"mock\":\"sdfsdf53\"}},\"originPassword\":{\"type\":\"string\",\"description\":\"原密码 base64加密\",\"mock\":{\"mock\":\"fsdfs45\"}}},\"required\":[\"newPassword\",\"originPassword\"]}",
+        "req_body_type": "json",
+        "res_body": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"resultCode\":{\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"string\",\"description\":\"返回码\",\"mock\":{\"mock\":\"00000\"}},\"cnMsg\":{\"type\":\"string\",\"description\":\"中文消息\",\"mock\":{\"mock\":\"密码修改成功\"}},\"enMsg\":{\"type\":\"string\",\"description\":\"英文消息\",\"mock\":{\"mock\":\"success\"}}},\"required\":[\"code\",\"cnMsg\",\"enMsg\"],\"description\":\"返回码\"},\"result\":{\"type\":\"object\",\"properties\":{\"totalCount\":{\"type\":\"integer\",\"description\":\"总数 可忽略\",\"mock\":{\"mock\":\"1\"}},\"pageSize\":{\"type\":\"integer\",\"description\":\"每页数据大小 可忽略\",\"mock\":{\"mock\":\"1\"}},\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{},\"required\":[]},\"description\":\"返回数据\"}},\"required\":[\"totalCount\",\"pageSize\",\"data\"]}},\"required\":[\"resultCode\",\"result\"]}",
+        "uid": 313,
+        "add_time": 1586763157,
+        "up_time": 1586851126,
+        "__v": 0
+      },
+      {
+        "query_path": {
+          "path": "/user/getUserByPage",
+          "params": []
+        },
+        "edit_uid": 0,
+        "status": "undone",
+        "type": "static",
+        "req_body_is_json_schema": true,
+        "res_body_is_json_schema": true,
+        "api_opened": false,
+        "index": 0,
+        "tag": [
+          "用户管理"
+        ],
+        "_id": 3213,
+        "method": "GET",
+        "catid": 893,
+        "title": "分页查询用户 按插入时间倒序返回",
+        "path": "/user/getUserByPage",
+        "project_id": 275,
+        "req_params": [],
+        "res_body_type": "json",
+        "req_query": [
+          {
+            "required": "1",
+            "_id": "5e991ad8a300c3abbb50fc2c",
+            "name": "pageNo",
+            "example": "1",
+            "desc": "从哪一页开始查"
+          },
+          {
+            "required": "1",
+            "_id": "5e991ad8a300c3abbb50fc2b",
+            "name": "pageSize",
+            "example": "100",
+            "desc": "分页大小"
+          },
+          {
+            "required": "1",
+            "_id": "5e991ad8a300c3abbb50fc2a",
+            "name": "status",
+            "example": "0",
+            "desc": "用户状态 0-启用 1-停用 -1 - 全部"
+          },
+          {
+            "required": "1",
+            "_id": "5e991ad8a300c3abbb50fc29",
+            "name": "createTime",
+            "example": "1",
+            "desc": "1-近一天 2-近一周 3-近一月 4-自定义 -1 - 全部"
+          },
+          {
+            "required": "1",
+            "_id": "5e991ad8a300c3abbb50fc28",
+            "name": "beginTime",
+            "example": "2020-1-1 10:10:10",
+            "desc": "开始时间 时间戳 非必须 用户选择自定义时间段时带上此参数"
+          },
+          {
+            "required": "1",
+            "_id": "5e991ad8a300c3abbb50fc27",
+            "name": "endTime",
+            "example": "2020-1-1 10:10:11",
+            "desc": "结束时间 时间戳 非必须 用户选择自定义时间段时带上此参数 不得小于等于开始时间"
+          },
+          {
+            "required": "1",
+            "_id": "5e991ad8a300c3abbb50fc26",
+            "name": "queryText",
+            "example": "zhangsan",
+            "desc": "真实姓名/手机号/邮箱 这三个字段都放在这里 非必须 后台模糊查询"
+          }
+        ],
+        "req_headers": [
+          {
+            "required": "1",
+            "_id": "5e991ad8a300c3abbb50fc2e",
+            "name": "Content-Type",
+            "value": "application/json",
+            "example": "application/json",
+            "desc": "内容媒体类型"
+          },
+          {
+            "required": "1",
+            "_id": "5e991ad8a300c3abbb50fc2d",
+            "name": "X-User-Token",
+            "value": "String",
+            "example": "xx",
+            "desc": "用户token"
+          }
+        ],
+        "req_body_form": [],
+        "desc": "<p>请求样例：</p>\n<p>URL&nbsp; - /apollo/user/getUserByPage</p>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">请求方法 - GET</span></p>\n<p>Headers -&nbsp;Content-Type=application/json<br>\n&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -&nbsp;X-User-Token=xxxx</p>\n<p>Query参数 -<br>\npageNo=1<br>\npageSize=10<br>\nstatus=0<br>\ncreateTime=0<br>\nbeginTime=2020-1-1 10:10:10<br>\nendTime=2020-1-1 10:10:13<br>\nqueryText=zhangsan</p>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">返回体 -</span></p>\n<pre><code data-language=\"json\" class=\"lang-json\">{\n \"resultCode\": {\n  \"code\": \"00000\",\n  \"cnMsg\": \"成功\",\n  \"enMsg\": \"success\"\n },\n \"result\": {\n  \"totalCount\": 1,\n  \"pageSize\": 1,\n  \"data\": [{\n    \"tel\": \"13800138000\",\n    \"realName\": \"zhangsan\",\n    \"id\": 1,\n    \"email\": \"11@qq.com\",\n    \"role\": 1,\n    \"status\": 1,\n    \"createTime\": \"2020-1-1 10:10:10\"\n  }]\n }\n}\n</code></pre>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">resultCode枚举 -</span></p>\n<pre><code data-language=\"json\" class=\"lang-json\">\"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"成功\",\n   \"enMsg\": \"success\"\n   },\n   {\n   \"code\": \"00001\",\n   \"cnMsg\": \"\",\n   \"enMsg\": \"\"\n   },\n   {\n   \"code\": \"09999\",\n   \"cnMsg\": \"系统内部错误\",\n   \"enMsg\": \"system error\"\n   },\n   {\n   \"code\": \"09998\",\n   \"cnMsg\": \"网络异常\",\n   \"enMsg\": \"network error\"\n   },\n   {\n   \"code\": \"09997\",\n   \"cnMsg\": \"参数错误\",\n   \"enMsg\": \"params error\"\n   },\n   {\n   \"code\": \"09996\",\n   \"cnMsg\": \"操作失败\",\n   \"enMsg\": \"operate fail\"\n   }\n</code></pre>\n",
+        "markdown": "请求样例：\n\nURL  - /apollo/user/getUserByPage\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">请求方法 - GET</span>\n\nHeaders - Content-Type=application/json\n              - X-User-Token=xxxx\n\nQuery参数 -\npageNo=1\npageSize=10\nstatus=0\ncreateTime=0\nbeginTime=2020-1-1 10:10:10\nendTime=2020-1-1 10:10:13\nqueryText=zhangsan\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">返回体 -</span>\n\n``` json\n{\n \"resultCode\": {\n  \"code\": \"00000\",\n  \"cnMsg\": \"成功\",\n  \"enMsg\": \"success\"\n },\n \"result\": {\n  \"totalCount\": 1,\n  \"pageSize\": 1,\n  \"data\": [{\n    \"tel\": \"13800138000\",\n    \"realName\": \"zhangsan\",\n    \"id\": 1,\n    \"email\": \"11@qq.com\",\n    \"role\": 1,\n    \"status\": 1,\n    \"createTime\": \"2020-1-1 10:10:10\"\n  }]\n }\n}\n```\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">resultCode枚举 -</span>\n\n``` json\n\"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"成功\",\n   \"enMsg\": \"success\"\n   },\n   {\n   \"code\": \"00001\",\n   \"cnMsg\": \"\",\n   \"enMsg\": \"\"\n   },\n   {\n   \"code\": \"09999\",\n   \"cnMsg\": \"系统内部错误\",\n   \"enMsg\": \"system error\"\n   },\n   {\n   \"code\": \"09998\",\n   \"cnMsg\": \"网络异常\",\n   \"enMsg\": \"network error\"\n   },\n   {\n   \"code\": \"09997\",\n   \"cnMsg\": \"参数错误\",\n   \"enMsg\": \"params error\"\n   },\n   {\n   \"code\": \"09996\",\n   \"cnMsg\": \"操作失败\",\n   \"enMsg\": \"operate fail\"\n   }\n```",
+        "res_body": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"resultCode\":{\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"string\",\"description\":\"返回码\",\"mock\":{\"mock\":\"00000\"}},\"cnMsg\":{\"type\":\"string\",\"description\":\"中文消息\",\"mock\":{\"mock\":\"成功\"}},\"enMsg\":{\"type\":\"string\",\"description\":\"英文消息\",\"mock\":{\"mock\":\"success\"}}},\"required\":[\"code\",\"cnMsg\",\"enMsg\"]},\"result\":{\"type\":\"object\",\"properties\":{\"totalCount\":{\"type\":\"integer\",\"description\":\"总数\",\"mock\":{\"mock\":\"1\"}},\"pageSize\":{\"type\":\"integer\",\"description\":\"每页数据数量\",\"mock\":{\"mock\":\"1\"}},\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"tel\":{\"type\":\"string\",\"description\":\"电话\",\"mock\":{\"mock\":\"13800138000\"}},\"realName\":{\"type\":\"string\",\"description\":\"真实姓名\",\"mock\":{\"mock\":\"name\"}},\"id\":{\"type\":\"integer\",\"description\":\"ID\",\"mock\":{\"mock\":\"1\"}},\"email\":{\"type\":\"string\",\"description\":\"邮箱\",\"mock\":{\"mock\":\"1@qq.com\"}},\"role\":{\"type\":\"integer\",\"description\":\"角色权限 0代表普通用户，1代表应用管理员，2代表运维，3代表管理员\",\"mock\":{\"mock\":\"1\"}},\"status\":{\"type\":\"integer\",\"description\":\"用户状态 0-启用 1-停用\",\"mock\":{\"mock\":\"0\"}},\"createTime\":{\"type\":\"string\",\"description\":\"时间戳 2020-1-1 10:10:10\",\"mock\":{\"mock\":\"2020-1-1 10:10:10\"}}},\"required\":[\"tel\",\"realName\",\"id\",\"email\",\"role\",\"status\",\"createTime\"]},\"description\":\"返回数据\"}},\"required\":[\"totalCount\",\"pageSize\",\"data\"]}},\"required\":[\"resultCode\",\"result\"]}",
+        "uid": 313,
+        "add_time": 1586763157,
+        "up_time": 1587092184,
+        "__v": 0
+      },
+      {
+        "query_path": {
+          "path": "/user/addByTemplate",
+          "params": []
+        },
+        "edit_uid": 0,
+        "status": "undone",
+        "type": "static",
+        "req_body_is_json_schema": true,
+        "res_body_is_json_schema": true,
+        "api_opened": false,
+        "index": 0,
+        "tag": [
+          "用户管理"
+        ],
+        "_id": 3216,
+        "method": "POST",
+        "catid": 893,
+        "title": "导入用户模板",
+        "path": "/user/addByTemplate",
+        "project_id": 275,
+        "req_params": [],
+        "res_body_type": "json",
+        "req_query": [],
+        "req_headers": [
+          {
+            "required": "1",
+            "_id": "5e956dd5a300c3abbb50f74b",
+            "name": "Content-Type",
+            "value": "multipart/form-data",
+            "example": "multipart/form-data",
+            "desc": "媒体类型"
+          },
+          {
+            "required": "1",
+            "_id": "5e956dd5a300c3abbb50f74a",
+            "name": "X-User-Token",
+            "value": "String",
+            "example": "xxxx",
+            "desc": "用户token"
+          }
+        ],
+        "req_body_form": [
+          {
+            "required": "1",
+            "_id": "5e956dd5a300c3abbb50f74c",
+            "name": "upfile",
+            "type": "file",
+            "example": "user.xls",
+            "desc": "用户模板 仅支持xls xls格式"
+          }
+        ],
+        "desc": "<p>请求样例：</p>\n<p>URL&nbsp; -&nbsp;/apollo/user/addByTemplate</p>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">请求方法 - POST</span></p>\n<p>Headers -&nbsp;Content-Type=<span class=\"colour\" style=\"color:rgb(64, 64, 64)\">multipart/form-data</span><br>\n&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -&nbsp;X-User-Token=xxxx</p>\n<p>请求体 - 用户模板文件<br>\n<a href=\"http://wiki.devdemo.trs.net.cn/pages/viewpage.action?pageId=16909215&amp;preview=%2F16909215%2F16915163%2F%E7%94%A8%E6%88%B7%E5%AF%BC%E5%85%A5%E6%A8%A1%E6%9D%BF.xlsx\">http://wiki.devdemo.trs.net.cn/pages/viewpage.action?pageId=16909215&amp;preview=/16909215/16915163/用户导入模板.xlsx</a></p>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">返回体 -</span></p>\n<pre><code data-language=\"json\" class=\"lang-json\">{\n \"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"导入成功\",\n   \"enMsg\": \"success\"\n },\n \"result\": {\n  \"totalCount\": 0,\n  \"pageSize\": 0,\n  \"data\": []\n\t}\n}\n</code></pre>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">resultCode枚举 -</span></p>\n<pre><code data-language=\"json\" class=\"lang-json\">\"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"导入成功\",\n   \"enMsg\": \"success\"\n   },\n   {\n   \"code\": \"00001\",\n   \"cnMsg\": \"\",\n   \"enMsg\": \"\"\n   },\n   {\n   \"code\": \"09999\",\n   \"cnMsg\": \"系统内部错误\",\n   \"enMsg\": \"system error\"\n   },\n   {\n   \"code\": \"09998\",\n   \"cnMsg\": \"网络异常\",\n   \"enMsg\": \"network error\"\n   },\n   {\n   \"code\": \"09997\",\n   \"cnMsg\": \"参数错误 导入失败\",\n   \"enMsg\": \"params error\"\n   },\n   {\n   \"code\": \"09996\",\n   \"cnMsg\": \"导入失败\",\n   \"enMsg\": \"operate fail\"\n   }\n</code></pre>\n",
+        "markdown": "请求样例：\n\nURL  - /apollo/user/addByTemplate\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">请求方法 - POST</span>\n\nHeaders - Content-Type=<span class=\"colour\" style=\"color:rgb(64, 64, 64)\">multipart/form-data</span>\n              - X-User-Token=xxxx\n\n请求体 - 用户模板文件\n[http://wiki.devdemo.trs.net.cn/pages/viewpage.action?pageId=16909215&preview=/16909215/16915163/用户导入模板.xlsx](http://wiki.devdemo.trs.net.cn/pages/viewpage.action?pageId=16909215&preview=%2F16909215%2F16915163%2F%E7%94%A8%E6%88%B7%E5%AF%BC%E5%85%A5%E6%A8%A1%E6%9D%BF.xlsx)\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">返回体 -</span>\n\n``` json\n{\n \"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"导入成功\",\n   \"enMsg\": \"success\"\n },\n \"result\": {\n  \"totalCount\": 0,\n  \"pageSize\": 0,\n  \"data\": []\n\t}\n}\n```\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">resultCode枚举 -</span>\n\n``` json\n\"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"导入成功\",\n   \"enMsg\": \"success\"\n   },\n   {\n   \"code\": \"00001\",\n   \"cnMsg\": \"\",\n   \"enMsg\": \"\"\n   },\n   {\n   \"code\": \"09999\",\n   \"cnMsg\": \"系统内部错误\",\n   \"enMsg\": \"system error\"\n   },\n   {\n   \"code\": \"09998\",\n   \"cnMsg\": \"网络异常\",\n   \"enMsg\": \"network error\"\n   },\n   {\n   \"code\": \"09997\",\n   \"cnMsg\": \"参数错误 导入失败\",\n   \"enMsg\": \"params error\"\n   },\n   {\n   \"code\": \"09996\",\n   \"cnMsg\": \"导入失败\",\n   \"enMsg\": \"operate fail\"\n   }\n```",
+        "req_body_other": "{\"type\":\"object\",\"title\":\"empty object\",\"properties\":{}}",
+        "req_body_type": "form",
+        "res_body": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"resultCode\":{\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"string\",\"description\":\"返回码\",\"mock\":{\"mock\":\"00000\"}},\"cnMsg\":{\"type\":\"string\",\"description\":\"中文消息\",\"mock\":{\"mock\":\"导入成功\"}},\"enMsg\":{\"type\":\"string\",\"description\":\"英文消息\",\"mock\":{\"mock\":\"success\"}}},\"required\":[\"code\",\"cnMsg\",\"enMsg\"]},\"result\":{\"type\":\"object\",\"properties\":{\"totalCount\":{\"type\":\"integer\",\"description\":\"数据总数 可忽略\",\"mock\":{\"mock\":\"1\"}},\"pageSize\":{\"type\":\"integer\",\"description\":\"每页返回数据大小 可忽略\",\"mock\":{\"mock\":\"1\"}},\"data\":{\"type\":\"array\",\"items\":{\"type\":\"string\"},\"description\":\"返回数据\"}},\"required\":[\"totalCount\",\"pageSize\",\"data\"]}},\"required\":[\"resultCode\",\"result\"]}",
+        "uid": 313,
+        "add_time": 1586763157,
+        "up_time": 1586851285,
+        "__v": 0
+      },
+      {
+        "query_path": {
+          "path": "/user/getAppList",
+          "params": []
+        },
+        "edit_uid": 0,
+        "status": "undone",
+        "type": "static",
+        "req_body_is_json_schema": true,
+        "res_body_is_json_schema": true,
+        "api_opened": false,
+        "index": 0,
+        "tag": [
+          "用户管理"
+        ],
+        "_id": 3219,
+        "method": "GET",
+        "catid": 893,
+        "title": "新增普通用户-查询应用列表",
+        "path": "/user/getAppList",
+        "project_id": 275,
+        "req_params": [],
+        "res_body_type": "json",
+        "req_query": [],
+        "req_headers": [
+          {
+            "required": "1",
+            "_id": "5e956df9a300c3abbb50f74e",
+            "name": "Content-Type",
+            "value": "String",
+            "example": "application/json",
+            "desc": "请求媒体类型"
+          },
+          {
+            "required": "1",
+            "_id": "5e956df9a300c3abbb50f74d",
+            "name": "X-User-Token",
+            "value": "String",
+            "example": "xxxx",
+            "desc": "用户Token"
+          }
+        ],
+        "req_body_form": [],
+        "desc": "<p>请求样例：</p>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">URL&nbsp; -&nbsp;</span>/apollo/user/getAppList</p>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">请求方法 - GET</span></p>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">Headers -&nbsp;Content-Type=application/json</span><br>\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span>X-User-Token=xxxxx</p>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">返回体 -</span></p>\n<pre><code data-language=\"json\" class=\"lang-json\">{\n \"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"登录成功\",\n   \"enMsg\": \"success\"\n   },\n \"result\": {\n   \"totalCount\": 0,\n   \"pageSize\": 0,\n \"data\": [\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \"appName\": \"123\",\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \"appId\": 1\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; },\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \"appName\": \"321\",\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \"appId\": 2\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }\n&nbsp;&nbsp;&nbsp; ]\n }\n}\n</code></pre>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">resultCode枚举 -</span></p>\n<pre><code data-language=\"json\" class=\"lang-json\">\"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"成功\",\n   \"enMsg\": \"success\"\n   },\n   {\n   \"code\": \"00001\",\n   \"cnMsg\": \"\",\n   \"enMsg\": \"\"\n   },\n   {\n   \"code\": \"09999\",\n   \"cnMsg\": \"系统内部错误\",\n   \"enMsg\": \"system error\"\n   },\n   {\n   \"code\": \"09998\",\n   \"cnMsg\": \"网络异常\",\n   \"enMsg\": \"network error\"\n   },\n   {\n   \"code\": \"09997\",\n   \"cnMsg\": \"手机号和（或）密码错误\",\n   \"enMsg\": \"params error\"\n   },\n   {\n   \"code\": \"09996\",\n   \"cnMsg\": \"登录失败\",\n   \"enMsg\": \"operate fail\"\n   }\n</code></pre>\n",
+        "markdown": "请求样例：\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">URL  - </span>/apollo/user/getAppList\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">请求方法 - GET</span>\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">Headers - Content-Type=application/json</span>\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">                 </span>X-User-Token=xxxxx\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">返回体 -</span>\n\n``` json\n{\n \"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"登录成功\",\n   \"enMsg\": \"success\"\n   },\n \"result\": {\n   \"totalCount\": 0,\n   \"pageSize\": 0,\n \"data\": [\n      {\n        \"appName\": \"123\",\n        \"appId\": 1\n      },\n      {\n        \"appName\": \"321\",\n        \"appId\": 2\n      }\n    ]\n }\n}\n```\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">resultCode枚举 -</span>\n\n``` json\n\"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"成功\",\n   \"enMsg\": \"success\"\n   },\n   {\n   \"code\": \"00001\",\n   \"cnMsg\": \"\",\n   \"enMsg\": \"\"\n   },\n   {\n   \"code\": \"09999\",\n   \"cnMsg\": \"系统内部错误\",\n   \"enMsg\": \"system error\"\n   },\n   {\n   \"code\": \"09998\",\n   \"cnMsg\": \"网络异常\",\n   \"enMsg\": \"network error\"\n   },\n   {\n   \"code\": \"09997\",\n   \"cnMsg\": \"手机号和（或）密码错误\",\n   \"enMsg\": \"params error\"\n   },\n   {\n   \"code\": \"09996\",\n   \"cnMsg\": \"登录失败\",\n   \"enMsg\": \"operate fail\"\n   }\n```",
+        "res_body": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"resultCode\":{\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"string\",\"description\":\"返回码\",\"mock\":{\"mock\":\"00000\"}},\"cnMsg\":{\"type\":\"string\",\"description\":\"中文消息\",\"mock\":{\"mock\":\"登录成功\"}},\"enMsg\":{\"type\":\"string\",\"description\":\"英文消息\",\"mock\":{\"mock\":\"success\"}}},\"required\":[\"code\",\"cnMsg\",\"enMsg\"]},\"result\":{\"type\":\"object\",\"properties\":{\"totalCount\":{\"type\":\"integer\",\"description\":\"总数\",\"mock\":{\"mock\":\"1\"}},\"pageSize\":{\"type\":\"integer\",\"description\":\"每页大小\",\"mock\":{\"mock\":\"1\"}},\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"appName\":{\"type\":\"string\",\"description\":\"应用名称\",\"mock\":{\"mock\":\"app\"}},\"appId\":{\"type\":\"integer\",\"description\":\"应用ID\",\"mock\":{\"mock\":\"1\"}}},\"required\":[\"appName\",\"appId\"]},\"description\":\"返回数据\"}},\"required\":[\"totalCount\",\"pageSize\",\"data\"]}},\"required\":[\"resultCode\",\"result\"]}",
+        "uid": 313,
+        "add_time": 1586763157,
+        "up_time": 1586851321,
+        "__v": 0
+      },
+      {
+        "query_path": {
+          "path": "/user/addUser",
+          "params": []
+        },
+        "edit_uid": 0,
+        "status": "undone",
+        "type": "static",
+        "req_body_is_json_schema": true,
+        "res_body_is_json_schema": true,
+        "api_opened": false,
+        "index": 0,
+        "tag": [
+          "用户管理"
+        ],
+        "_id": 3222,
+        "method": "POST",
+        "catid": 893,
+        "title": "新增用户",
+        "path": "/user/addUser",
+        "project_id": 275,
+        "req_params": [],
+        "res_body_type": "json",
+        "req_query": [],
+        "req_headers": [
+          {
+            "required": "1",
+            "_id": "5ea252cd13c9d518af2018af",
+            "name": "Content-Type",
+            "value": "application/json",
+            "example": "application/json",
+            "desc": "内容类型"
+          },
+          {
+            "required": "1",
+            "_id": "5ea252cd13c9d518af2018ae",
+            "name": "X-User-Token",
+            "value": "String",
+            "example": "xxx",
+            "desc": "用户的token"
+          }
+        ],
+        "req_body_form": [],
+        "desc": "<p>请求样例：<br>\nURL&nbsp; -&nbsp;/apollo/user/addUser</p>\n<p>请求方法 - POST</p>\n<p>Headers -&nbsp;Content-Type=application/json<br>\n&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-&nbsp;X-User-Token=xxxxx</p>\n<p>请求体 -</p>\n<pre><code data-language=\"json\" class=\"lang-json\">{\n\t\"email\": \"12324@qq.com\",\n\t\"realName\": \"管理员\",\n\t\"role\": 1,\n\t\"tel\": \"1522147770\",\n\t\"appAuth\": [1,2]\n}\n</code></pre>\n<p>返回体 -</p>\n<pre><code data-language=\"json\" class=\"lang-json\">\n{\n \"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"新增用户成功\",\n   \"enMsg\": \"success\"\n   },\n \"result\": {\n   \"totalCount\": 0,\n   \"pageSize\": 0,\n \"data\": [{\n   }]\n }\n}\n</code></pre>\n<p>resultCode枚举 -</p>\n<pre><code data-language=\"json\" class=\"lang-json\">\"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"新增用户成功\",\n   \"enMsg\": \"success\"\n   },\n   {\n   \"code\": \"00001\",\n   \"cnMsg\": \"\",\n   \"enMsg\": \"\"\n   },\n   {\n   \"code\": \"09999\",\n   \"cnMsg\": \"系统内部错误\",\n   \"enMsg\": \"system error\"\n   },\n   {\n   \"code\": \"09998\",\n   \"cnMsg\": \"网络异常\",\n   \"enMsg\": \"network error\"\n   },\n   {\n   \"code\": \"09997\",\n   \"cnMsg\": \"参数错误 新增失败\",\n   \"enMsg\": \"params error\"\n   },\n   {\n   \"code\": \"09996\",\n   \"cnMsg\": \"新增失败\",\n   \"enMsg\": \"operate fail\"\n   }\n</code></pre>\n",
+        "markdown": "请求样例：\nURL  - /apollo/user/addUser\n\n请求方法 - POST\n\nHeaders - Content-Type=application/json\n               - X-User-Token=xxxxx\n\n请求体 -\n\n``` json\n{\n\t\"email\": \"12324@qq.com\",\n\t\"realName\": \"管理员\",\n\t\"role\": 1,\n\t\"tel\": \"1522147770\",\n\t\"appAuth\": [1,2]\n}\n```\n\n返回体 -\n\n``` json\n\n{\n \"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"新增用户成功\",\n   \"enMsg\": \"success\"\n   },\n \"result\": {\n   \"totalCount\": 0,\n   \"pageSize\": 0,\n \"data\": [{\n   }]\n }\n}\n```\n\nresultCode枚举 -\n\n``` json\n\"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"新增用户成功\",\n   \"enMsg\": \"success\"\n   },\n   {\n   \"code\": \"00001\",\n   \"cnMsg\": \"\",\n   \"enMsg\": \"\"\n   },\n   {\n   \"code\": \"09999\",\n   \"cnMsg\": \"系统内部错误\",\n   \"enMsg\": \"system error\"\n   },\n   {\n   \"code\": \"09998\",\n   \"cnMsg\": \"网络异常\",\n   \"enMsg\": \"network error\"\n   },\n   {\n   \"code\": \"09997\",\n   \"cnMsg\": \"参数错误 新增失败\",\n   \"enMsg\": \"params error\"\n   },\n   {\n   \"code\": \"09996\",\n   \"cnMsg\": \"新增失败\",\n   \"enMsg\": \"operate fail\"\n   }\n```",
+        "req_body_other": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"tel\":{\"type\":\"string\",\"description\":\"手机号\",\"mock\":{\"mock\":\"13800138000\"}},\"password\":{\"type\":\"string\",\"description\":\"密码 \",\"mock\":{\"mock\":\"11QWw@\"}},\"realName\":{\"type\":\"string\",\"description\":\"真实姓名\",\"mock\":{\"mock\":\"name\"}},\"email\":{\"type\":\"string\",\"description\":\"电子邮箱\",\"mock\":{\"mock\":\"1@qq.com\"}},\"role\":{\"type\":\"integer\",\"description\":\"角色，1代表普通用户，2代表应用管理员，3代表运维，4代表管理员\",\"mock\":{\"mock\":\"1\"}},\"appAuth\":{\"type\":\"array\",\"items\":{\"type\":\"integer\",\"description\":\"app id 这个用户可以操作的APP id\",\"mock\":{\"mock\":\"1\"}},\"description\":\"应用权限列表 非必须 仅当新建普通用户时带上\"}},\"required\":[\"tel\",\"password\",\"realName\",\"email\",\"role\"]}",
+        "req_body_type": "json",
+        "res_body": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"resultCode\":{\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"string\",\"description\":\"返回码\",\"mock\":{\"mock\":\"00000\"}},\"cnMsg\":{\"type\":\"string\",\"description\":\"中文消息\",\"mock\":{\"mock\":\"新增用户成功\"}},\"enMsg\":{\"type\":\"string\",\"description\":\"英文消息\",\"mock\":{\"mock\":\"success\"}}},\"required\":[\"code\",\"cnMsg\",\"enMsg\"]},\"result\":{\"type\":\"object\",\"properties\":{\"totalCount\":{\"type\":\"integer\",\"description\":\"总数 可忽略\",\"mock\":{\"mock\":\"1\"}},\"pageSize\":{\"type\":\"integer\",\"description\":\"每页数量 可忽略\",\"mock\":{\"mock\":\"1\"}},\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{}},\"description\":\"返回数据\"}},\"required\":[\"totalCount\",\"pageSize\",\"data\"]}},\"required\":[\"resultCode\",\"result\"]}",
+        "uid": 313,
+        "add_time": 1586763158,
+        "up_time": 1587696333,
+        "__v": 0
+      },
+      {
+        "query_path": {
+          "path": "/user/getOneDetail",
+          "params": []
+        },
+        "edit_uid": 0,
+        "status": "undone",
+        "type": "static",
+        "req_body_is_json_schema": true,
+        "res_body_is_json_schema": true,
+        "api_opened": false,
+        "index": 0,
+        "tag": [
+          "用户管理"
+        ],
+        "_id": 3225,
+        "method": "GET",
+        "catid": 893,
+        "title": "查询单个用户详情",
+        "path": "/user/getOneDetail",
+        "project_id": 275,
+        "req_params": [],
+        "res_body_type": "json",
+        "req_query": [
+          {
+            "required": "1",
+            "_id": "5e956e4ca300c3abbb50f756",
+            "name": "id",
+            "example": "1",
+            "desc": "用户ID"
+          }
+        ],
+        "req_headers": [
+          {
+            "required": "1",
+            "_id": "5e956e4ca300c3abbb50f758",
+            "name": "Content-Type",
+            "value": "String",
+            "example": "application/json",
+            "desc": "内容媒体类型"
+          },
+          {
+            "required": "1",
+            "_id": "5e956e4ca300c3abbb50f757",
+            "name": "X-User-Token",
+            "value": "String",
+            "example": "xxxx",
+            "desc": "用户Token"
+          }
+        ],
+        "req_body_form": [],
+        "desc": "<p>请求样例：<br>\nURL&nbsp; -&nbsp;/apollo/user/getOneDetail<br>\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">请求方法 - GET</span><br>\nHeaders -&nbsp;Content-Type=application/json<br>\n&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-&nbsp;X-User-Token=xxxxx</p>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">返回体 -</span></p>\n<pre><code data-language=\"json\" class=\"lang-json\">{\n \"resultCode\": {\n  \"code\": \"00000\",\n  \"cnMsg\": \"成功\",\n  \"enMsg\": \"success\"\n },\n  \"result\": {\n   \"totalCount\": 0,\n   \"pageSize\": 0,\n  \"data\": [{\n   \"tel\": \"dfsfsfds\",\n   \"realName\": \"zhangsan\",\n   \"email\": \"11@qq.com\",\n   \"role\": 1,\n   \"id\": 1,\n   \"appAuth\": [1,2]\n   }]\n }\n}\n</code></pre>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">resultCode枚举 -</span></p>\n<pre><code data-language=\"json\" class=\"lang-json\">\"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"成功\",\n   \"enMsg\": \"success\"\n   },\n   {\n   \"code\": \"00001\",\n   \"cnMsg\": \"\",\n   \"enMsg\": \"\"\n   },\n   {\n   \"code\": \"09999\",\n   \"cnMsg\": \"系统内部错误\",\n   \"enMsg\": \"system error\"\n   },\n   {\n   \"code\": \"09998\",\n   \"cnMsg\": \"网络异常\",\n   \"enMsg\": \"network error\"\n   },\n   {\n   \"code\": \"09997\",\n   \"cnMsg\": \"参数错误\",\n   \"enMsg\": \"params error\"\n   },\n   {\n   \"code\": \"09996\",\n   \"cnMsg\": \"操作失败\",\n   \"enMsg\": \"operate fail\"\n   }\n</code></pre>\n",
+        "markdown": "请求样例：\nURL  - /apollo/user/getOneDetail\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">请求方法 - GET</span>\nHeaders - Content-Type=application/json\n               - X-User-Token=xxxxx\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">返回体 -</span>\n\n``` json\n{\n \"resultCode\": {\n  \"code\": \"00000\",\n  \"cnMsg\": \"成功\",\n  \"enMsg\": \"success\"\n },\n  \"result\": {\n   \"totalCount\": 0,\n   \"pageSize\": 0,\n  \"data\": [{\n   \"tel\": \"dfsfsfds\",\n   \"realName\": \"zhangsan\",\n   \"email\": \"11@qq.com\",\n   \"role\": 1,\n   \"id\": 1,\n   \"appAuth\": [1,2]\n   }]\n }\n}\n```\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">resultCode枚举 -</span>\n\n``` json\n\"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"成功\",\n   \"enMsg\": \"success\"\n   },\n   {\n   \"code\": \"00001\",\n   \"cnMsg\": \"\",\n   \"enMsg\": \"\"\n   },\n   {\n   \"code\": \"09999\",\n   \"cnMsg\": \"系统内部错误\",\n   \"enMsg\": \"system error\"\n   },\n   {\n   \"code\": \"09998\",\n   \"cnMsg\": \"网络异常\",\n   \"enMsg\": \"network error\"\n   },\n   {\n   \"code\": \"09997\",\n   \"cnMsg\": \"参数错误\",\n   \"enMsg\": \"params error\"\n   },\n   {\n   \"code\": \"09996\",\n   \"cnMsg\": \"操作失败\",\n   \"enMsg\": \"operate fail\"\n   }\n```",
+        "res_body": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"resultCode\":{\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"string\",\"description\":\"返回码\",\"mock\":{\"mock\":\"00000\"}},\"cnMsg\":{\"type\":\"string\",\"description\":\"中文消息\",\"mock\":{\"mock\":\"成功\"}},\"enMsg\":{\"type\":\"string\",\"description\":\"英文消息\",\"mock\":{\"mock\":\"success\"}}},\"required\":[\"code\",\"cnMsg\",\"enMsg\"],\"description\":\"返回码\"},\"result\":{\"type\":\"object\",\"properties\":{\"totalCount\":{\"type\":\"integer\",\"description\":\"总数 可忽略\",\"mock\":{\"mock\":\"1\"}},\"pageSize\":{\"type\":\"integer\",\"description\":\"每页大小 可忽略\",\"mock\":{\"mock\":\"1\"}},\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"tel\":{\"type\":\"string\",\"description\":\"电话 base64加密后的\",\"mock\":{\"mock\":\"23423423424dsda\"}},\"realName\":{\"type\":\"string\",\"description\":\"真实姓名\",\"mock\":{\"mock\":\"name\"}},\"email\":{\"type\":\"string\",\"description\":\"邮箱\",\"mock\":{\"mock\":\"1@qq.com\"}},\"role\":{\"type\":\"integer\",\"description\":\"角色，0代表普通用户，1代表应用管理员，2代表运维，3代表管理员，4代表超级管理员\",\"mock\":{\"mock\":\"1\"}},\"id\":{\"type\":\"integer\",\"description\":\"ID\",\"mock\":{\"mock\":\"1\"}},\"appAuth\":{\"type\":\"array\",\"items\":{\"type\":\"integer\",\"description\":\"APP ID\",\"mock\":{\"mock\":\"1\"}},\"description\":\"非必须 普通用户时带上 用户具有权限的APP\"}},\"required\":[\"tel\",\"realName\",\"email\",\"role\",\"id\"],\"description\":\"用户详情\"},\"description\":\"返回数据\"}},\"required\":[\"totalCount\",\"pageSize\",\"data\"]}},\"required\":[\"resultCode\",\"result\"]}",
+        "uid": 313,
+        "add_time": 1586763158,
+        "up_time": 1586851404,
+        "__v": 0
+      },
+      {
+        "query_path": {
+          "path": "/user/checkMobile",
+          "params": []
+        },
+        "edit_uid": 0,
+        "status": "undone",
+        "type": "static",
+        "req_body_is_json_schema": true,
+        "res_body_is_json_schema": true,
+        "api_opened": false,
+        "index": 0,
+        "tag": [],
+        "_id": 3369,
+        "method": "POST",
+        "catid": 893,
+        "title": "校验手机号全局唯一",
+        "path": "/user/checkMobile",
+        "project_id": 275,
+        "req_params": [],
+        "res_body_type": "json",
+        "req_query": [],
+        "req_headers": [
+          {
+            "required": "1",
+            "_id": "5eb61b9813c9d518af201c20",
+            "name": "Content-Type",
+            "value": "application/json",
+            "example": "application/json",
+            "desc": "请求媒体类型"
+          },
+          {
+            "required": "1",
+            "_id": "5eb61b9813c9d518af201c1f",
+            "name": "X-User-Token",
+            "value": "String",
+            "example": "xx",
+            "desc": "用户token"
+          }
+        ],
+        "req_body_form": [],
+        "desc": "<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">请求样例：</span></p>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">URL&nbsp; -&nbsp;</span>/apollo/user/verifyTel</p>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\"><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">请求方法 - POST</span></span></p>\n<p>Headers -&nbsp;Content-Type=application/json<br>\n&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-&nbsp;X-User-Token=xxxxx</p>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\"><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">请求体 -</span></span></p>\n<pre><code data-language=\"json\" class=\"lang-json\">{\n \"tel\": \"13800138000\"\n}\n</code></pre>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\"><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">返回体 -</span></span></p>\n<pre><code data-language=\"json\" class=\"lang-json\">\n{\n \"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"手机号无冲突\",\n   \"enMsg\": \"success\"\n   },\n \"result\": {\n   \"totalCount\": 0,\n   \"pageSize\": 0,\n \"data\": [{\n   }\n]\n }\n}\n</code></pre>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\"><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">resultCode枚举 -</span></span></p>\n<pre><code data-language=\"json\" class=\"lang-json\">\"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"手机号无冲突\",\n   \"enMsg\": \"success\"\n   },\n   {\n   \"code\": \"00001\",\n   \"cnMsg\": \"\",\n   \"enMsg\": \"\"\n   },\n   {\n   \"code\": \"09999\",\n   \"cnMsg\": \"系统内部错误\",\n   \"enMsg\": \"system error\"\n   },\n   {\n   \"code\": \"09998\",\n   \"cnMsg\": \"网络异常\",\n   \"enMsg\": \"network error\"\n   },\n   {\n   \"code\": \"09997\",\n   \"cnMsg\": \"参数错误 新增失败\",\n   \"enMsg\": \"params error\"\n   },\n   {\n   \"code\": \"09996\",\n   \"cnMsg\": \"新增失败\",\n   \"enMsg\": \"operate fail\"\n   }\n</code></pre>\n",
+        "markdown": "<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">请求样例：</span>\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">URL  - </span>/apollo/user/verifyTel\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\"><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">请求方法 - POST</span></span>\n\nHeaders - Content-Type=application/json\n               - X-User-Token=xxxxx\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\"><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">请求体 -</span></span>\n\n``` json\n{\n \"tel\": \"13800138000\"\n}\n```\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\"><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">返回体 -</span></span>\n\n``` json\n\n{\n \"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"手机号无冲突\",\n   \"enMsg\": \"success\"\n   },\n \"result\": {\n   \"totalCount\": 0,\n   \"pageSize\": 0,\n \"data\": [{\n   }\n]\n }\n}\n```\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\"><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">resultCode枚举 -</span></span>\n\n``` json\n\"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"手机号无冲突\",\n   \"enMsg\": \"success\"\n   },\n   {\n   \"code\": \"00001\",\n   \"cnMsg\": \"\",\n   \"enMsg\": \"\"\n   },\n   {\n   \"code\": \"09999\",\n   \"cnMsg\": \"系统内部错误\",\n   \"enMsg\": \"system error\"\n   },\n   {\n   \"code\": \"09998\",\n   \"cnMsg\": \"网络异常\",\n   \"enMsg\": \"network error\"\n   },\n   {\n   \"code\": \"09997\",\n   \"cnMsg\": \"参数错误 新增失败\",\n   \"enMsg\": \"params error\"\n   },\n   {\n   \"code\": \"09996\",\n   \"cnMsg\": \"新增失败\",\n   \"enMsg\": \"operate fail\"\n   }\n```",
+        "req_body_other": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"email\":{\"type\":\"string\"},\"random\":{\"type\":\"number\"}}}",
+        "req_body_type": "json",
+        "res_body": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"resultCode\":{\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"string\",\"mock\":{\"mock\":\"00000\"},\"description\":\"返回码\"},\"cnMsg\":{\"type\":\"string\",\"mock\":{\"mock\":\"手机号无冲突\"},\"description\":\"中文消息\"},\"enMsg\":{\"type\":\"string\",\"mock\":{\"mock\":\"success\"},\"description\":\"英文消息\"}},\"required\":[\"code\",\"cnMsg\",\"enMsg\"]},\"result\":{\"type\":\"object\",\"properties\":{\"totalCount\":{\"type\":\"integer\",\"mock\":{\"mock\":\"0\"},\"description\":\"总数\"},\"pageSize\":{\"type\":\"integer\",\"mock\":{\"mock\":\"0\"},\"description\":\"每页大小\"},\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{},\"required\":[]}}},\"required\":[\"totalCount\",\"pageSize\",\"data\"]}},\"required\":[\"resultCode\",\"result\"]}",
+        "uid": 313,
+        "add_time": 1586935668,
+        "up_time": 1588992920,
+        "__v": 0
+      },
+      {
+        "query_path": {
+          "path": "/user/checkEmail",
+          "params": []
+        },
+        "edit_uid": 0,
+        "status": "undone",
+        "type": "static",
+        "req_body_is_json_schema": true,
+        "res_body_is_json_schema": true,
+        "api_opened": false,
+        "index": 0,
+        "tag": [],
+        "_id": 3366,
+        "method": "POST",
+        "catid": 893,
+        "title": "校验邮箱全局唯一",
+        "path": "/user/checkEmail",
+        "project_id": 275,
+        "req_params": [],
+        "res_body_type": "json",
+        "uid": 313,
+        "add_time": 1586935345,
+        "up_time": 1588046743,
+        "req_query": [],
+        "req_headers": [
+          {
+            "required": "1",
+            "_id": "5ea7ab9713c9d518af20195c",
+            "name": "Content-Type",
+            "value": "application/json",
+            "example": "application/json",
+            "desc": "请求媒体类型"
+          },
+          {
+            "required": "1",
+            "_id": "5ea7ab9713c9d518af20195b",
+            "name": "X-User-Token",
+            "value": "String",
+            "example": "xx",
+            "desc": "用户token"
+          }
+        ],
+        "req_body_form": [],
+        "__v": 0,
+        "desc": "<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">请求样例：</span></p>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">URL&nbsp; -&nbsp;</span>/apollo/user/verifyEmail</p>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\"><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">请求方法 - POST</span></span></p>\n<p>Headers -&nbsp;Content-Type=application/json<br>\n&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-&nbsp;X-User-Token=xxxxx</p>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\"><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">请求体 -</span></span></p>\n<pre><code data-language=\"json\" class=\"lang-json\">{\n \"email\": \"123@qq.com\",\n\"id\":12\n}\n</code></pre>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\"><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">返回体 -</span></span></p>\n<pre><code data-language=\"json\" class=\"lang-json\">\n{\n \"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"邮箱无冲突\",\n   \"enMsg\": \"success\"\n   },\n \"result\": {\n   \"totalCount\": 0,\n   \"pageSize\": 0,\n \"data\": [{\n   }\n]\n }\n}\n</code></pre>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\"><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">resultCode枚举 -</span></span></p>\n<pre><code data-language=\"json\" class=\"lang-json\">\"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"邮箱无冲突\",\n   \"enMsg\": \"success\"\n   },\n   {\n   \"code\": \"00001\",\n   \"cnMsg\": \"\",\n   \"enMsg\": \"\"\n   },\n   {\n   \"code\": \"09999\",\n   \"cnMsg\": \"系统内部错误\",\n   \"enMsg\": \"system error\"\n   },\n   {\n   \"code\": \"09998\",\n   \"cnMsg\": \"网络异常\",\n   \"enMsg\": \"network error\"\n   },\n   {\n   \"code\": \"09997\",\n   \"cnMsg\": \"参数错误 新增失败\",\n   \"enMsg\": \"params error\"\n   },\n   {\n   \"code\": \"09996\",\n   \"cnMsg\": \"新增失败\",\n   \"enMsg\": \"operate fail\"\n   }\n</code></pre>\n",
+        "markdown": "<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">请求样例：</span>\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">URL  - </span>/apollo/user/verifyEmail\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\"><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">请求方法 - POST</span></span>\n\nHeaders - Content-Type=application/json\n               - X-User-Token=xxxxx\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\"><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">请求体 -</span></span>\n\n``` json\n{\n \"email\": \"123@qq.com\",\n\"id\":12\n}\n```\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\"><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">返回体 -</span></span>\n\n``` json\n\n{\n \"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"邮箱无冲突\",\n   \"enMsg\": \"success\"\n   },\n \"result\": {\n   \"totalCount\": 0,\n   \"pageSize\": 0,\n \"data\": [{\n   }\n]\n }\n}\n```\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\"><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">resultCode枚举 -</span></span>\n\n``` json\n\"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"邮箱无冲突\",\n   \"enMsg\": \"success\"\n   },\n   {\n   \"code\": \"00001\",\n   \"cnMsg\": \"\",\n   \"enMsg\": \"\"\n   },\n   {\n   \"code\": \"09999\",\n   \"cnMsg\": \"系统内部错误\",\n   \"enMsg\": \"system error\"\n   },\n   {\n   \"code\": \"09998\",\n   \"cnMsg\": \"网络异常\",\n   \"enMsg\": \"network error\"\n   },\n   {\n   \"code\": \"09997\",\n   \"cnMsg\": \"参数错误 新增失败\",\n   \"enMsg\": \"params error\"\n   },\n   {\n   \"code\": \"09996\",\n   \"cnMsg\": \"新增失败\",\n   \"enMsg\": \"operate fail\"\n   }\n```",
+        "req_body_other": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"resultCode\":{\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"string\",\"mock\":{\"mock\":\"00000\"},\"description\":\"返回码\"},\"cnMsg\":{\"type\":\"string\",\"mock\":{\"mock\":\"邮箱无冲突\"},\"description\":\"中文消息\"},\"enMsg\":{\"type\":\"string\",\"mock\":{\"mock\":\"success\"},\"description\":\"英文消息\"}},\"required\":[\"code\",\"cnMsg\",\"enMsg\"],\"mock\":{\"mock\":\"@string\"}},\"result\":{\"type\":\"object\",\"properties\":{\"totalCount\":{\"type\":\"integer\",\"mock\":{\"mock\":\"1\"},\"description\":\"总数\"},\"pageSize\":{\"type\":\"integer\",\"mock\":{\"mock\":\"1\"},\"description\":\"每页数量\"},\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{},\"required\":[]}}},\"required\":[\"totalCount\",\"pageSize\",\"data\"]}},\"required\":[\"resultCode\",\"result\"]}",
+        "req_body_type": "json",
+        "res_body": "{\"type\":\"object\",\"title\":\"empty object\",\"properties\":{\"email\":{\"type\":\"string\",\"mock\":{\"mock\":\"11@qq.com\"},\"description\":\"邮箱\"},\"id\":{\"type\":\"number\"}},\"required\":[\"email\",\"id\"]}"
+      },
+      {
+        "query_path": {
+          "path": "/user/getCreatableRole",
+          "params": []
+        },
+        "edit_uid": 0,
+        "status": "undone",
+        "type": "static",
+        "req_body_is_json_schema": true,
+        "res_body_is_json_schema": true,
+        "api_opened": false,
+        "index": 0,
+        "tag": [
+          "用户管理"
+        ],
+        "_id": 3228,
+        "method": "GET",
+        "catid": 893,
+        "title": "根据登录用户获取能创建的角色",
+        "path": "/user/getCreatableRole",
+        "project_id": 275,
+        "req_params": [],
+        "res_body_type": "json",
+        "req_query": [],
+        "req_headers": [
+          {
+            "required": "1",
+            "_id": "5e956e75a300c3abbb50f75a",
+            "name": "Content-Type",
+            "value": "String",
+            "example": "application-json",
+            "desc": "请求媒体类型"
+          },
+          {
+            "required": "1",
+            "_id": "5e956e75a300c3abbb50f759",
+            "name": "X-User-Token",
+            "value": "String",
+            "example": "xxxxx",
+            "desc": "用户token"
+          }
+        ],
+        "req_body_form": [],
+        "desc": "<p>请求样例：<br>\nURL&nbsp; -&nbsp;/apollo/user/getCreatableRole</p>\n<p>请求方法 - GET</p>\n<p>Headers -&nbsp;Content-Type=application/json<br>\n&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -&nbsp;X-User-Token=xxxx</p>\n<p>返回体 -</p>\n<pre><code data-language=\"json\" class=\"lang-json\">{\n \"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"成功\",\n   \"enMsg\": \"success\"\n },\n \"result\": {\n  \"totalCount\": 0,\n  \"pageSize\": 0,\n  \"data\": [0, 1]\n\t}\n}\n</code></pre>\n<p>resultCode枚举 -</p>\n<pre><code data-language=\"json\" class=\"lang-json\">\"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"成功\",\n   \"enMsg\": \"success\"\n   },\n   {\n   \"code\": \"00001\",\n   \"cnMsg\": \"\",\n   \"enMsg\": \"\"\n   },\n   {\n   \"code\": \"09999\",\n   \"cnMsg\": \"系统内部错误\",\n   \"enMsg\": \"system error\"\n   },\n   {\n   \"code\": \"09998\",\n   \"cnMsg\": \"网络异常\",\n   \"enMsg\": \"network error\"\n   },\n   {\n   \"code\": \"09997\",\n   \"cnMsg\": \"参数错误\",\n   \"enMsg\": \"params error\"\n   },\n   {\n   \"code\": \"09996\",\n   \"cnMsg\": \"操作失败\",\n   \"enMsg\": \"operate fail\"\n   }\n</code></pre>\n",
+        "markdown": "请求样例：\nURL  - /apollo/user/getCreatableRole\n\n请求方法 - GET\n\nHeaders - Content-Type=application/json\n              - X-User-Token=xxxx\n\n返回体 -\n\n``` json\n{\n \"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"成功\",\n   \"enMsg\": \"success\"\n },\n \"result\": {\n  \"totalCount\": 0,\n  \"pageSize\": 0,\n  \"data\": [0, 1]\n\t}\n}\n```\n\nresultCode枚举 -\n\n``` json\n\"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"成功\",\n   \"enMsg\": \"success\"\n   },\n   {\n   \"code\": \"00001\",\n   \"cnMsg\": \"\",\n   \"enMsg\": \"\"\n   },\n   {\n   \"code\": \"09999\",\n   \"cnMsg\": \"系统内部错误\",\n   \"enMsg\": \"system error\"\n   },\n   {\n   \"code\": \"09998\",\n   \"cnMsg\": \"网络异常\",\n   \"enMsg\": \"network error\"\n   },\n   {\n   \"code\": \"09997\",\n   \"cnMsg\": \"参数错误\",\n   \"enMsg\": \"params error\"\n   },\n   {\n   \"code\": \"09996\",\n   \"cnMsg\": \"操作失败\",\n   \"enMsg\": \"operate fail\"\n   }\n```",
+        "res_body": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"resultCode\":{\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"string\",\"description\":\"返回码\",\"mock\":{\"mock\":\"00000\"}},\"cnMsg\":{\"type\":\"string\",\"description\":\"中文消息\",\"mock\":{\"mock\":\"成功\"}},\"enMsg\":{\"type\":\"string\",\"description\":\"英文消息\",\"mock\":{\"mock\":\"success\"}}},\"required\":[\"code\",\"cnMsg\",\"enMsg\"],\"description\":\"返回码\"},\"result\":{\"type\":\"object\",\"properties\":{\"totalCount\":{\"type\":\"integer\",\"description\":\"总数 可忽略\",\"mock\":{\"mock\":\"1\"}},\"pageSize\":{\"type\":\"integer\",\"description\":\"每页数据大小 可忽略\",\"mock\":{\"mock\":\"1\"}},\"data\":{\"type\":\"array\",\"items\":{\"type\":\"integer\",\"description\":\"权限码数组 返回此用户可创建的角色权限 0代表普通用户，1代表应用管理员，2代表运维，3代表管理员\",\"mock\":{\"mock\":\"1\"}},\"description\":\"返回数据\"}},\"required\":[\"totalCount\",\"pageSize\",\"data\"],\"description\":\"结果\"}},\"required\":[\"resultCode\",\"result\"]}",
+        "uid": 313,
+        "add_time": 1586763158,
+        "up_time": 1586851445,
+        "__v": 0
+      },
+      {
+        "query_path": {
+          "path": "/user/batchDelete",
+          "params": []
+        },
+        "edit_uid": 0,
+        "status": "undone",
+        "type": "static",
+        "req_body_is_json_schema": true,
+        "res_body_is_json_schema": true,
+        "api_opened": false,
+        "index": 0,
+        "tag": [
+          "用户管理"
+        ],
+        "_id": 3231,
+        "method": "POST",
+        "catid": 893,
+        "title": "用户删除（批量）",
+        "path": "/user/batchDelete",
+        "project_id": 275,
+        "req_params": [],
+        "res_body_type": "json",
+        "req_query": [],
+        "req_headers": [
+          {
+            "required": "1",
+            "_id": "5e956e9ba300c3abbb50f75c",
+            "name": "Content-Type",
+            "value": "application/json",
+            "example": "application/json",
+            "desc": "请求媒体类型"
+          },
+          {
+            "required": "1",
+            "_id": "5e956e9ba300c3abbb50f75b",
+            "name": "X-User-Token",
+            "value": "String",
+            "example": "xxx",
+            "desc": "用户token"
+          }
+        ],
+        "req_body_form": [],
+        "desc": "<p>请求样例：</p>\n<p>URL&nbsp; -&nbsp;/apollo/user/batchDelete</p>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">请求方法 - POST</span></p>\n<p>Headers -&nbsp;Content-Type=application/json<br>\n&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -&nbsp;X-User-Token=xxxx</p>\n<p>请求体 -</p>\n<pre><code>{\"userIds\":[0,1]}\n</code></pre>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">返回体 -</span></p>\n<pre><code data-language=\"json\" class=\"lang-json\">{\n \"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"用户批量删除成功\",\n   \"enMsg\": \"success\"\n },\n \"result\": {\n  \"totalCount\": 0,\n  \"pageSize\": 0,\n  \"data\": []\n\t}\n}\n</code></pre>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">resultCode枚举 -</span></p>\n<pre><code data-language=\"json\" class=\"lang-json\">\"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"用户批量删除成功\",\n   \"enMsg\": \"success\"\n   },\n   {\n   \"code\": \"00001\",\n   \"cnMsg\": \"\",\n   \"enMsg\": \"\"\n   },\n   {\n   \"code\": \"09999\",\n   \"cnMsg\": \"系统内部错误\",\n   \"enMsg\": \"system error\"\n   },\n   {\n   \"code\": \"09998\",\n   \"cnMsg\": \"网络异常\",\n   \"enMsg\": \"network error\"\n   },\n   {\n   \"code\": \"09997\",\n   \"cnMsg\": \"参数错误\",\n   \"enMsg\": \"params error\"\n   },\n   {\n   \"code\": \"09996\",\n   \"cnMsg\": \"操作失败\",\n   \"enMsg\": \"operate fail\"\n   }\n</code></pre>\n",
+        "markdown": "请求样例：\n\nURL  - /apollo/user/batchDelete\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">请求方法 - POST</span>\n\nHeaders - Content-Type=application/json\n              - X-User-Token=xxxx\n\n请求体 -\n\n```\n{\"userIds\":[0,1]}\n```\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">返回体 -</span>\n\n``` json\n{\n \"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"用户批量删除成功\",\n   \"enMsg\": \"success\"\n },\n \"result\": {\n  \"totalCount\": 0,\n  \"pageSize\": 0,\n  \"data\": []\n\t}\n}\n```\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">resultCode枚举 -</span>\n\n``` json\n\"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"用户批量删除成功\",\n   \"enMsg\": \"success\"\n   },\n   {\n   \"code\": \"00001\",\n   \"cnMsg\": \"\",\n   \"enMsg\": \"\"\n   },\n   {\n   \"code\": \"09999\",\n   \"cnMsg\": \"系统内部错误\",\n   \"enMsg\": \"system error\"\n   },\n   {\n   \"code\": \"09998\",\n   \"cnMsg\": \"网络异常\",\n   \"enMsg\": \"network error\"\n   },\n   {\n   \"code\": \"09997\",\n   \"cnMsg\": \"参数错误\",\n   \"enMsg\": \"params error\"\n   },\n   {\n   \"code\": \"09996\",\n   \"cnMsg\": \"操作失败\",\n   \"enMsg\": \"operate fail\"\n   }\n```",
+        "req_body_other": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"userIds\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"description\":\"用户ID\",\"mock\":{\"mock\":\"1\"}},\"description\":\"用户ID\"}},\"required\":[\"userIds\"]}",
+        "req_body_type": "json",
+        "res_body": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"resultCode\":{\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"string\",\"description\":\"返回码\",\"mock\":{\"mock\":\"00000\"}},\"cnMsg\":{\"type\":\"string\",\"description\":\"中文消息\",\"mock\":{\"mock\":\"用户批量删除成功\"}},\"enMsg\":{\"type\":\"string\",\"description\":\"英文消息\",\"mock\":{\"mock\":\"success\"}}},\"required\":[\"code\",\"cnMsg\",\"enMsg\"],\"description\":\"返回码\"},\"result\":{\"type\":\"object\",\"properties\":{\"totalCount\":{\"type\":\"number\",\"description\":\"总数 可忽略\",\"mock\":{\"mock\":\"1\"}},\"pageSize\":{\"type\":\"number\",\"description\":\"每页大小 可忽略\",\"mock\":{\"mock\":\"1\"}},\"data\":{\"type\":\"array\",\"items\":{\"type\":\"string\"},\"description\":\"返回数据\"}},\"required\":[\"totalCount\",\"pageSize\",\"data\"]}},\"required\":[\"resultCode\",\"result\"]}",
+        "uid": 313,
+        "add_time": 1586763158,
+        "up_time": 1586851483,
+        "__v": 0
+      },
+      {
+        "query_path": {
+          "path": "/user/batchChangeStatus",
+          "params": []
+        },
+        "edit_uid": 0,
+        "status": "undone",
+        "type": "static",
+        "req_body_is_json_schema": true,
+        "res_body_is_json_schema": true,
+        "api_opened": false,
+        "index": 0,
+        "tag": [
+          "用户管理"
+        ],
+        "_id": 3234,
+        "method": "POST",
+        "catid": 893,
+        "title": "用户启停用（批量）",
+        "path": "/user/batchChangeStatus",
+        "project_id": 275,
+        "req_params": [],
+        "res_body_type": "json",
+        "req_query": [],
+        "req_headers": [
+          {
+            "required": "1",
+            "_id": "5e956ebfa300c3abbb50f75e",
+            "name": "Content-Type",
+            "value": "application/json",
+            "example": "application/json",
+            "desc": "请求媒体类型"
+          },
+          {
+            "required": "1",
+            "_id": "5e956ebfa300c3abbb50f75d",
+            "name": "X-User-Token",
+            "value": "String",
+            "example": "xxxx",
+            "desc": "用户token"
+          }
+        ],
+        "req_body_form": [],
+        "desc": "<p>请求样例：</p>\n<p>URL&nbsp; -&nbsp;/apollo/user/batchChangeStatus</p>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">请求方法 - POST</span></p>\n<p>Headers -&nbsp;Content-Type=application/json<br>\n&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -&nbsp;X-User-Token=xxxx</p>\n<p>请求体 -</p>\n<pre><code>{\n \"userIds\": [1, 2],\n \"status\": 1\n}\n</code></pre>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">返回体 -</span></p>\n<pre><code data-language=\"json\" class=\"lang-json\">{\n \"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"用户批量启（停）用成功\",\n   \"enMsg\": \"success\"\n },\n \"result\": {\n  \"totalCount\": 0,\n  \"pageSize\": 0,\n  \"data\": []\n\t}\n}\n</code></pre>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">resultCode枚举 -</span></p>\n<pre><code data-language=\"json\" class=\"lang-json\">\"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"用户批量启（停）用成功\",\n   \"enMsg\": \"success\"\n   },\n   {\n   \"code\": \"00001\",\n   \"cnMsg\": \"\",\n   \"enMsg\": \"\"\n   },\n   {\n   \"code\": \"09999\",\n   \"cnMsg\": \"系统内部错误\",\n   \"enMsg\": \"system error\"\n   },\n   {\n   \"code\": \"09998\",\n   \"cnMsg\": \"网络异常\",\n   \"enMsg\": \"network error\"\n   },\n   {\n   \"code\": \"09997\",\n   \"cnMsg\": \"参数错误\",\n   \"enMsg\": \"params error\"\n   },\n   {\n   \"code\": \"09996\",\n   \"cnMsg\": \"操作失败\",\n   \"enMsg\": \"operate fail\"\n   }\n</code></pre>\n",
+        "markdown": "请求样例：\n\nURL  - /apollo/user/batchChangeStatus\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">请求方法 - POST</span>\n\nHeaders - Content-Type=application/json\n              - X-User-Token=xxxx\n\n请求体 -\n\n```\n{\n \"userIds\": [1, 2],\n \"status\": 1\n}\n```\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">返回体 -</span>\n\n``` json\n{\n \"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"用户批量启（停）用成功\",\n   \"enMsg\": \"success\"\n },\n \"result\": {\n  \"totalCount\": 0,\n  \"pageSize\": 0,\n  \"data\": []\n\t}\n}\n```\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">resultCode枚举 -</span>\n\n``` json\n\"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"用户批量启（停）用成功\",\n   \"enMsg\": \"success\"\n   },\n   {\n   \"code\": \"00001\",\n   \"cnMsg\": \"\",\n   \"enMsg\": \"\"\n   },\n   {\n   \"code\": \"09999\",\n   \"cnMsg\": \"系统内部错误\",\n   \"enMsg\": \"system error\"\n   },\n   {\n   \"code\": \"09998\",\n   \"cnMsg\": \"网络异常\",\n   \"enMsg\": \"network error\"\n   },\n   {\n   \"code\": \"09997\",\n   \"cnMsg\": \"参数错误\",\n   \"enMsg\": \"params error\"\n   },\n   {\n   \"code\": \"09996\",\n   \"cnMsg\": \"操作失败\",\n   \"enMsg\": \"operate fail\"\n   }\n```",
+        "req_body_other": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"userIds\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"description\":\"用户ID\",\"mock\":{\"mock\":\"1\"}},\"description\":\"用户ID\"},\"status\":{\"type\":\"integer\",\"description\":\"用户状态 0-启用 1-停用\",\"mock\":{\"mock\":\"0\"}}},\"required\":[\"userIds\",\"status\"]}",
+        "req_body_type": "json",
+        "res_body": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"resultCode\":{\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"string\",\"description\":\"返回码\",\"mock\":{\"mock\":\"00000\"}},\"cnMsg\":{\"type\":\"string\",\"description\":\"中文消息\",\"mock\":{\"mock\":\"用户批量启（停）用成功\"}},\"enMsg\":{\"type\":\"string\",\"description\":\"英文消息\",\"mock\":{\"mock\":\"success\"}}},\"required\":[\"code\",\"cnMsg\",\"enMsg\"]},\"result\":{\"type\":\"object\",\"properties\":{\"totalCount\":{\"type\":\"number\",\"description\":\"总数 可忽略\",\"mock\":{\"mock\":\"1\"}},\"pageSize\":{\"type\":\"number\",\"description\":\"每页大小 可忽略\",\"mock\":{\"mock\":\"1\"}},\"data\":{\"type\":\"array\",\"items\":{\"type\":\"string\"},\"description\":\"返回数据\"}},\"required\":[\"totalCount\",\"pageSize\",\"data\"]}},\"required\":[\"resultCode\",\"result\"]}",
+        "uid": 313,
+        "add_time": 1586763158,
+        "up_time": 1586851519,
+        "__v": 0
+      },
+      {
+        "query_path": {
+          "path": "/user/login",
+          "params": []
+        },
+        "edit_uid": 0,
+        "status": "undone",
+        "type": "static",
+        "req_body_is_json_schema": true,
+        "res_body_is_json_schema": true,
+        "api_opened": false,
+        "index": 0,
+        "tag": [
+          "用户管理",
+          "公共接口"
+        ],
+        "_id": 3237,
+        "method": "POST",
+        "catid": 893,
+        "title": "登录",
+        "path": "/user/login",
+        "project_id": 275,
+        "req_params": [],
+        "res_body_type": "json",
+        "req_query": [],
+        "req_headers": [
+          {
+            "required": "1",
+            "_id": "5e97bc08a300c3abbb50f9ce",
+            "name": "Content-Type",
+            "value": "application/json",
+            "example": "application/json",
+            "desc": "内容媒体类型"
+          }
+        ],
+        "req_body_form": [],
+        "desc": "<h3>请求样例：</h3>\n<p>URL&nbsp; -&nbsp;/apollo/user/login</p>\n<p>请求方法 - POST</p>\n<p>Headers -&nbsp;Content-Type=application/json</p>\n<p>请求体 -</p>\n<pre><code data-language=\"json\" class=\"lang-json\">{\n \"tel\": \"MTM4MDAxMzgwMDA=\",\n \"password\": \"Z3VpemhlQDEyM0d1aQ==\"\n}\n</code></pre>\n<p>返回体 -</p>\n<pre><code data-language=\"json\" class=\"lang-json\">{\n \"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"登录成功\",\n   \"enMsg\": \"success\"\n   },\n \"result\": {\n   \"totalCount\": 0,\n   \"pageSize\": 0,\n \"data\": [{\n   \"token\": \"xxx\",\n   \"role\":1,\n   \"userId\":1\n   }]\n }\n}\n</code></pre>\n<p>resultCode枚举 -</p>\n<pre><code data-language=\"json\" class=\"lang-json\">\"resultCode\": {\n   \"code\": \"000000\",\n   \"cnMsg\": \"登录成功\",\n   \"enMsg\": \"success\"\n   },\n   {\n   \"code\": \"00001\",\n   \"cnMsg\": \"\",\n   \"enMsg\": \"\"\n   },\n   {\n   \"code\": \"09999\",\n   \"cnMsg\": \"系统内部错误\",\n   \"enMsg\": \"system error\"\n   },\n   {\n   \"code\": \"09998\",\n   \"cnMsg\": \"网络异常\",\n   \"enMsg\": \"network error\"\n   },\n   {\n   \"code\": \"09997\",\n   \"cnMsg\": \"手机号和（或）密码错误\",\n   \"enMsg\": \"params error\"\n   },\n   {\n   \"code\": \"09996\",\n   \"cnMsg\": \"登录失败\",\n   \"enMsg\": \"operate fail\"\n   }\n</code></pre>\n",
+        "markdown": "### 请求样例：\n\nURL  - /apollo/user/login\n\n请求方法 - POST\n\nHeaders - Content-Type=application/json\n\n请求体 -\n\n``` json\n{\n \"tel\": \"MTM4MDAxMzgwMDA=\",\n \"password\": \"Z3VpemhlQDEyM0d1aQ==\"\n}\n```\n\n返回体 -\n\n``` json\n{\n \"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"登录成功\",\n   \"enMsg\": \"success\"\n   },\n \"result\": {\n   \"totalCount\": 0,\n   \"pageSize\": 0,\n \"data\": [{\n   \"token\": \"xxx\",\n   \"role\":1,\n   \"userId\":1\n   }]\n }\n}\n```\n\nresultCode枚举 -\n\n``` json\n\"resultCode\": {\n   \"code\": \"000000\",\n   \"cnMsg\": \"登录成功\",\n   \"enMsg\": \"success\"\n   },\n   {\n   \"code\": \"00001\",\n   \"cnMsg\": \"\",\n   \"enMsg\": \"\"\n   },\n   {\n   \"code\": \"09999\",\n   \"cnMsg\": \"系统内部错误\",\n   \"enMsg\": \"system error\"\n   },\n   {\n   \"code\": \"09998\",\n   \"cnMsg\": \"网络异常\",\n   \"enMsg\": \"network error\"\n   },\n   {\n   \"code\": \"09997\",\n   \"cnMsg\": \"手机号和（或）密码错误\",\n   \"enMsg\": \"params error\"\n   },\n   {\n   \"code\": \"09996\",\n   \"cnMsg\": \"登录失败\",\n   \"enMsg\": \"operate fail\"\n   }\n```",
+        "res_body": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"resultCode\":{\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"string\",\"description\":\"返回码\",\"mock\":{\"mock\":\"00000\"}},\"cnMsg\":{\"type\":\"string\",\"description\":\"中文消息\",\"mock\":{\"mock\":\"登录成功\"}},\"enMsg\":{\"type\":\"string\",\"description\":\"英文消息\",\"mock\":{\"mock\":\"success\"}}},\"required\":[\"code\",\"cnMsg\",\"enMsg\"]},\"result\":{\"type\":\"object\",\"properties\":{\"totalCount\":{\"type\":\"number\",\"description\":\"总数 可忽略\",\"mock\":{\"mock\":\"1\"}},\"pageSize\":{\"type\":\"number\",\"description\":\"每页数据量 可忽略\",\"mock\":{\"mock\":\"1\"}},\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"token\":{\"type\":\"string\",\"description\":\"用户token\",\"mock\":{\"mock\":\"dsfs\"}},\"role\":{\"type\":\"integer\",\"mock\":{\"mock\":\"1\"},\"description\":\"角色编码，1代表普通用户，2代表应用管理员，3代表运维，4代表管理员，5代表超级管理员\"},\"userId\":{\"type\":\"integer\",\"mock\":{\"mock\":\"1\"},\"description\":\"用户ID\"}},\"required\":[\"token\",\"role\",\"userId\"]},\"description\":\"返回数据\"}},\"required\":[\"totalCount\",\"pageSize\",\"data\"]}},\"required\":[\"resultCode\",\"result\"]}",
+        "req_body_other": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"tel\":{\"type\":\"string\",\"description\":\"base64加密后的11位电话\",\"mock\":{\"mock\":\"fdsff3242adasf==\"}},\"password\":{\"type\":\"string\",\"description\":\"base64加密后的密码 长度不少于4位 包含大小写字母、数字\",\"mock\":{\"mock\":\"ccxes342\"}}},\"required\":[\"tel\",\"password\"]}",
+        "req_body_type": "json",
+        "uid": 313,
+        "add_time": 1586763158,
+        "up_time": 1587002376,
+        "__v": 0
+      },
+      {
+        "query_path": {
+          "path": "/user/editUser",
+          "params": []
+        },
+        "edit_uid": 0,
+        "status": "undone",
+        "type": "static",
+        "req_body_is_json_schema": true,
+        "res_body_is_json_schema": true,
+        "api_opened": false,
+        "index": 0,
+        "tag": [
+          "用户管理"
+        ],
+        "_id": 3240,
+        "method": "POST",
+        "catid": 893,
+        "title": "编辑用户",
+        "path": "/user/editUser",
+        "project_id": 275,
+        "req_params": [],
+        "res_body_type": "json",
+        "req_query": [],
+        "req_headers": [
+          {
+            "required": "1",
+            "_id": "5e96b8a1a300c3abbb50f8e8",
+            "name": "Content-Type",
+            "value": "application/json",
+            "example": "application/json",
+            "desc": "请求媒体类型"
+          },
+          {
+            "required": "1",
+            "_id": "5e96b8a1a300c3abbb50f8e7",
+            "name": "X-User-Token",
+            "value": "String",
+            "example": "xxx",
+            "desc": "用户Token"
+          }
+        ],
+        "req_body_form": [],
+        "desc": "<p>请求样例：</p>\n<p>URL&nbsp; -&nbsp;/apollo/user/editUser</p>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">请求方法 - POST</span></p>\n<p>Headers -&nbsp;Content-Type=application/json<br>\n&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -&nbsp;X-User-Token=xxxx</p>\n<p>请求体 -</p>\n<pre><code>{\n\"realName\": \"ddd\",\n\"email\": \"22@qq.com\",\n\"role\": 1,\n\"userId\": 1,\n\"appAuth\": [1,2]\n}\n</code></pre>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">返回体 -</span></p>\n<pre><code data-language=\"json\" class=\"lang-json\">{\n \"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"编辑成功\",\n   \"enMsg\": \"success\"\n },\n \"result\": {\n  \"totalCount\": 0,\n  \"pageSize\": 0,\n  \"data\": []\n\t}\n}\n</code></pre>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">resultCode枚举 -</span></p>\n<pre><code data-language=\"json\" class=\"lang-json\">\"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"编辑成功\",\n   \"enMsg\": \"success\"\n   },\n   {\n   \"code\": \"00001\",\n   \"cnMsg\": \"\",\n   \"enMsg\": \"\"\n   },\n   {\n   \"code\": \"09999\",\n   \"cnMsg\": \"系统内部错误\",\n   \"enMsg\": \"system error\"\n   },\n   {\n   \"code\": \"09998\",\n   \"cnMsg\": \"网络异常\",\n   \"enMsg\": \"network error\"\n   },\n   {\n   \"code\": \"09997\",\n   \"cnMsg\": \"参数错误\",\n   \"enMsg\": \"params error\"\n   },\n   {\n   \"code\": \"09996\",\n   \"cnMsg\": \"操作失败\",\n   \"enMsg\": \"operate fail\"\n   }\n</code></pre>\n",
+        "markdown": "请求样例：\n\nURL  - /apollo/user/editUser\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">请求方法 - POST</span>\n\nHeaders - Content-Type=application/json\n              - X-User-Token=xxxx\n\n请求体 -\n\n```\n{\n\"realName\": \"ddd\",\n\"email\": \"22@qq.com\",\n\"role\": 1,\n\"userId\": 1,\n\"appAuth\": [1,2]\n}\n```\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">返回体 -</span>\n\n``` json\n{\n \"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"编辑成功\",\n   \"enMsg\": \"success\"\n },\n \"result\": {\n  \"totalCount\": 0,\n  \"pageSize\": 0,\n  \"data\": []\n\t}\n}\n```\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">resultCode枚举 -</span>\n\n``` json\n\"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"编辑成功\",\n   \"enMsg\": \"success\"\n   },\n   {\n   \"code\": \"00001\",\n   \"cnMsg\": \"\",\n   \"enMsg\": \"\"\n   },\n   {\n   \"code\": \"09999\",\n   \"cnMsg\": \"系统内部错误\",\n   \"enMsg\": \"system error\"\n   },\n   {\n   \"code\": \"09998\",\n   \"cnMsg\": \"网络异常\",\n   \"enMsg\": \"network error\"\n   },\n   {\n   \"code\": \"09997\",\n   \"cnMsg\": \"参数错误\",\n   \"enMsg\": \"params error\"\n   },\n   {\n   \"code\": \"09996\",\n   \"cnMsg\": \"操作失败\",\n   \"enMsg\": \"operate fail\"\n   }\n```",
+        "req_body_other": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"realName\":{\"type\":\"string\",\"description\":\"真实姓名\",\"mock\":{\"mock\":\"name\"}},\"email\":{\"type\":\"string\",\"description\":\"电子邮箱\",\"mock\":{\"mock\":\"1@qq.com\"}},\"role\":{\"type\":\"integer\",\"description\":\"角色编码，1代表普通用户，2代表应用管理员，3代表运维，4代表管理员，5代表超级管理员\",\"mock\":{\"mock\":\"1\"}},\"userId\":{\"type\":\"integer\",\"description\":\"用户ID\",\"mock\":{\"mock\":\"1\"}},\"appAuth\":{\"type\":\"array\",\"items\":{\"type\":\"integer\",\"description\":\"应用ID\",\"mock\":{\"mock\":\"1\"}},\"description\":\"非必须 普通用户时带上 用户具有权限的APP列表\"}},\"required\":[\"realName\",\"email\",\"role\",\"userId\"]}",
+        "req_body_type": "json",
+        "res_body": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"resultCode\":{\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"string\",\"description\":\"返回码\",\"mock\":{\"mock\":\"00000\"}},\"cnMsg\":{\"type\":\"string\",\"description\":\"中文消息\",\"mock\":{\"mock\":\"编辑成功\"}},\"enMsg\":{\"type\":\"string\",\"description\":\"英文消息\",\"mock\":{\"mock\":\"success\"}}},\"required\":[\"code\",\"cnMsg\",\"enMsg\"],\"description\":\"返回码\"},\"result\":{\"type\":\"object\",\"properties\":{\"totalCount\":{\"type\":\"number\",\"description\":\"总数 可忽略\",\"mock\":{\"mock\":\"1\"}},\"pageSize\":{\"type\":\"number\",\"description\":\"分页大小 可忽略\",\"mock\":{\"mock\":\"1\"}},\"data\":{\"type\":\"array\",\"items\":{\"type\":\"string\"},\"description\":\"返回数据\"}},\"required\":[\"totalCount\",\"pageSize\",\"data\"]}},\"required\":[\"resultCode\",\"result\"]}",
+        "uid": 313,
+        "add_time": 1586763158,
+        "up_time": 1586935969,
+        "__v": 0
+      },
+      {
+        "query_path": {
+          "path": "/user/logout",
+          "params": []
+        },
+        "edit_uid": 0,
+        "status": "undone",
+        "type": "static",
+        "req_body_is_json_schema": true,
+        "res_body_is_json_schema": true,
+        "api_opened": false,
+        "index": 0,
+        "tag": [
+          "用户管理",
+          "公共接口"
+        ],
+        "_id": 3243,
+        "method": "POST",
+        "catid": 893,
+        "title": "退出登录",
+        "path": "/user/logout",
+        "project_id": 275,
+        "req_params": [],
+        "res_body_type": "json",
+        "req_query": [],
+        "req_headers": [
+          {
+            "required": "1",
+            "_id": "5e956fa1a300c3abbb50f765",
+            "name": "Content-Type",
+            "value": "application/json",
+            "example": "application/json",
+            "desc": "内容媒体类型"
+          },
+          {
+            "required": "1",
+            "_id": "5e956fa1a300c3abbb50f764",
+            "name": "X-User-Token",
+            "value": "String",
+            "example": "xxx",
+            "desc": "用户token"
+          }
+        ],
+        "req_body_form": [],
+        "desc": "<p>请求样例：</p>\n<p>URL&nbsp; -&nbsp;/apollo/user/logout</p>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">请求方法 - POST</span></p>\n<p>Headers -&nbsp;Content-Type=application/json<br>\n&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-&nbsp;X-User-Token=xxxxx</p>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">返回体 -</span></p>\n<pre><code data-language=\"json\" class=\"lang-json\">\n{\n \"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"登出成功\",\n   \"enMsg\": \"success\"\n   },\n \"result\": {\n   \"totalCount\": 0,\n   \"pageSize\": 0,\n \"data\": [{\n   }]\n }\n}\n</code></pre>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">resultCode枚举 -</span></p>\n<pre><code data-language=\"json\" class=\"lang-json\">\"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"登出成功\",\n   \"enMsg\": \"success\"\n   },\n   {\n   \"code\": \"00001\",\n   \"cnMsg\": \"\",\n   \"enMsg\": \"\"\n   },\n   {\n   \"code\": \"09999\",\n   \"cnMsg\": \"系统内部错误\",\n   \"enMsg\": \"system error\"\n   },\n   {\n   \"code\": \"09998\",\n   \"cnMsg\": \"网络异常\",\n   \"enMsg\": \"network error\"\n   },\n   {\n   \"code\": \"09997\",\n   \"cnMsg\": \"参数错误\",\n   \"enMsg\": \"params error\"\n   },\n   {\n   \"code\": \"09996\",\n   \"cnMsg\": \"操作失败\",\n   \"enMsg\": \"operate fail\"\n   }\n</code></pre>\n",
+        "markdown": "请求样例：\n\nURL  - /apollo/user/logout\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">请求方法 - POST</span>\n\nHeaders - Content-Type=application/json\n               - X-User-Token=xxxxx\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">返回体 -</span>\n\n``` json\n\n{\n \"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"登出成功\",\n   \"enMsg\": \"success\"\n   },\n \"result\": {\n   \"totalCount\": 0,\n   \"pageSize\": 0,\n \"data\": [{\n   }]\n }\n}\n```\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">resultCode枚举 -</span>\n\n``` json\n\"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"登出成功\",\n   \"enMsg\": \"success\"\n   },\n   {\n   \"code\": \"00001\",\n   \"cnMsg\": \"\",\n   \"enMsg\": \"\"\n   },\n   {\n   \"code\": \"09999\",\n   \"cnMsg\": \"系统内部错误\",\n   \"enMsg\": \"system error\"\n   },\n   {\n   \"code\": \"09998\",\n   \"cnMsg\": \"网络异常\",\n   \"enMsg\": \"network error\"\n   },\n   {\n   \"code\": \"09997\",\n   \"cnMsg\": \"参数错误\",\n   \"enMsg\": \"params error\"\n   },\n   {\n   \"code\": \"09996\",\n   \"cnMsg\": \"操作失败\",\n   \"enMsg\": \"operate fail\"\n   }\n```",
+        "req_body_other": "{\"type\":\"object\",\"title\":\"empty object\",\"properties\":{}}",
+        "req_body_type": "json",
+        "res_body": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"resultCode\":{\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"string\",\"description\":\"返回码\",\"mock\":{\"mock\":\"00000\"}},\"cnMsg\":{\"type\":\"string\",\"description\":\"中文消息\",\"mock\":{\"mock\":\"登出成功\"}},\"enMsg\":{\"type\":\"string\",\"description\":\"英文消息\",\"mock\":{\"mock\":\"success\"}}},\"required\":[\"code\",\"cnMsg\",\"enMsg\"],\"description\":\"返回码\"},\"result\":{\"type\":\"object\",\"properties\":{\"totalCount\":{\"type\":\"integer\",\"description\":\"总数 可忽略\",\"mock\":{\"mock\":\"1\"}},\"pageSize\":{\"type\":\"integer\",\"description\":\"每页大小 可忽略\",\"mock\":{\"mock\":\"1\"}},\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{},\"required\":[]},\"description\":\"返回数据\"}},\"required\":[\"totalCount\",\"pageSize\",\"data\"]}},\"required\":[\"resultCode\",\"result\"]}",
+        "uid": 313,
+        "add_time": 1586763158,
+        "up_time": 1586851745,
+        "__v": 0
+      },
+      {
+        "query_path": {
+          "path": "/user/batchResetPassword",
+          "params": []
+        },
+        "edit_uid": 0,
+        "status": "undone",
+        "type": "static",
+        "req_body_is_json_schema": true,
+        "res_body_is_json_schema": true,
+        "api_opened": false,
+        "index": 0,
+        "tag": [
+          "公共接口",
+          "用户管理"
+        ],
+        "_id": 3246,
+        "method": "POST",
+        "catid": 893,
+        "title": "重置密码（批量）",
+        "path": "/user/batchResetPassword",
+        "project_id": 275,
+        "req_params": [],
+        "res_body_type": "json",
+        "req_query": [],
+        "req_headers": [
+          {
+            "required": "1",
+            "_id": "5e95713ea300c3abbb50f767",
+            "name": "Content-Type",
+            "value": "application/json",
+            "example": "application/json",
+            "desc": "内容媒体类型"
+          },
+          {
+            "required": "1",
+            "_id": "5e95713ea300c3abbb50f766",
+            "name": "X-User-Token",
+            "value": "String",
+            "example": "xxx",
+            "desc": "用户token"
+          }
+        ],
+        "req_body_form": [],
+        "desc": "<p>请求样例：</p>\n<p>URL&nbsp; - /apollo/user/batchResetPassword<br>\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">请求方法 - POST</span><br>\nHeaders -&nbsp;Content-Type=application/json<br>\n&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-&nbsp;X-User-Token=xxxxx</p>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">请求体 -</span></p>\n<pre><code data-language=\"json\" class=\"lang-json\">{\n \"userIds\": [1, 2],\n \"newPassword\": \"xxx\"\n}\n</code></pre>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">返回体 -</span></p>\n<pre><code data-language=\"json\" class=\"lang-json\">\n{\n \"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"批量重置密码成功\",\n   \"enMsg\": \"success\"\n   },\n \"result\": {\n   \"totalCount\": 0,\n   \"pageSize\": 0,\n \"data\": [{\n   }]\n }\n}\n</code></pre>\n<p><span class=\"colour\" style=\"color:rgb(85, 85, 85)\">resultCode枚举 -</span></p>\n<pre><code data-language=\"json\" class=\"lang-json\">\"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"批量重置密码成功\",\n   \"enMsg\": \"success\"\n   },\n   {\n   \"code\": \"00001\",\n   \"cnMsg\": \"\",\n   \"enMsg\": \"\"\n   },\n   {\n   \"code\": \"09999\",\n   \"cnMsg\": \"系统内部错误\",\n   \"enMsg\": \"system error\"\n   },\n   {\n   \"code\": \"09998\",\n   \"cnMsg\": \"网络异常\",\n   \"enMsg\": \"network error\"\n   },\n   {\n   \"code\": \"09997\",\n   \"cnMsg\": \"参数错误 重置失败\",\n   \"enMsg\": \"params error\"\n   },\n   {\n   \"code\": \"09996\",\n   \"cnMsg\": \"重置失败\",\n   \"enMsg\": \"operate fail\"\n   }\n</code></pre>\n",
+        "markdown": "请求样例：\n\nURL  - /apollo/user/batchResetPassword\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">请求方法 - POST</span>\nHeaders - Content-Type=application/json\n               - X-User-Token=xxxxx\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">请求体 -</span>\n\n``` json\n{\n \"userIds\": [1, 2],\n \"newPassword\": \"xxx\"\n}\n```\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">返回体 -</span>\n\n``` json\n\n{\n \"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"批量重置密码成功\",\n   \"enMsg\": \"success\"\n   },\n \"result\": {\n   \"totalCount\": 0,\n   \"pageSize\": 0,\n \"data\": [{\n   }]\n }\n}\n```\n\n<span class=\"colour\" style=\"color:rgb(85, 85, 85)\">resultCode枚举 -</span>\n\n``` json\n\"resultCode\": {\n   \"code\": \"00000\",\n   \"cnMsg\": \"批量重置密码成功\",\n   \"enMsg\": \"success\"\n   },\n   {\n   \"code\": \"00001\",\n   \"cnMsg\": \"\",\n   \"enMsg\": \"\"\n   },\n   {\n   \"code\": \"09999\",\n   \"cnMsg\": \"系统内部错误\",\n   \"enMsg\": \"system error\"\n   },\n   {\n   \"code\": \"09998\",\n   \"cnMsg\": \"网络异常\",\n   \"enMsg\": \"network error\"\n   },\n   {\n   \"code\": \"09997\",\n   \"cnMsg\": \"参数错误 重置失败\",\n   \"enMsg\": \"params error\"\n   },\n   {\n   \"code\": \"09996\",\n   \"cnMsg\": \"重置失败\",\n   \"enMsg\": \"operate fail\"\n   }\n```",
+        "req_body_other": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"userIds\":{\"type\":\"array\",\"items\":{\"type\":\"integer\",\"description\":\"用户ID\",\"mock\":{\"mock\":\"1\"}},\"description\":\"用户IDs\"},\"newPassword\":{\"type\":\"string\",\"description\":\"新密码\",\"mock\":{\"mock\":\"aaa\"}}},\"required\":[\"userIds\",\"newPassword\"]}",
+        "req_body_type": "json",
+        "res_body": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"resultCode\":{\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"string\",\"description\":\"返回码\",\"mock\":{\"mock\":\"00000\"}},\"cnMsg\":{\"type\":\"string\",\"description\":\"中文消息\",\"mock\":{\"mock\":\"批量重置密码成功\"}},\"enMsg\":{\"type\":\"string\",\"description\":\"英文消息\",\"mock\":{\"mock\":\"success\"}}},\"required\":[\"code\",\"cnMsg\",\"enMsg\"],\"description\":\"返回码\"},\"result\":{\"type\":\"object\",\"properties\":{\"totalCount\":{\"type\":\"integer\",\"description\":\"总数 可忽略\",\"mock\":{\"mock\":\"1\"}},\"pageSize\":{\"type\":\"integer\",\"description\":\"分页大小 可忽略\",\"mock\":{\"mock\":\"1\"}},\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{},\"required\":[]},\"description\":\"返回数据\"}},\"required\":[\"totalCount\",\"pageSize\",\"data\"],\"description\":\"结果\"}},\"required\":[\"resultCode\",\"result\"]}",
+        "uid": 313,
+        "add_time": 1586763158,
+        "up_time": 1586852158,
+        "__v": 0
+      }
+    ]
+  }
+]
