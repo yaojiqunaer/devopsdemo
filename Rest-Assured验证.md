@@ -55,7 +55,7 @@ Rest-Assured 同样能够验证从服务器返回的 HTTP 响应报文，例如�
   }
   ```
 
-  ![image-20200727143317132](C:\Users\zhangxiaodong\AppData\Roaming\Typora\typora-user-images\image-20200727143317132.png)
+  ![image-20200727143317132](Rest-Assured验证.assets/image-20200727143317132.png)
 
   **正常测试返回**
 
@@ -112,7 +112,7 @@ Rest-Assured 同样能够验证从服务器返回的 HTTP 响应报文，例如�
   }
   ```
 
-  ![image-20200727145310074](C:\Users\zhangxiaodong\AppData\Roaming\Typora\typora-user-images\image-20200727145310074.png)
+  ![image-20200727145310074-1595921948587](Rest-Assured验证.assets/image-20200727145310074-1595921948587-1595922080835.png)
 
   **测试结果**
 
@@ -165,8 +165,10 @@ Rest-Assured 同样能够验证从服务器返回的 HTTP 响应报文，例如�
   }
   ```
 
-  **返回信息**
+  ![image-20200728154457258](Rest-Assured验证.assets/image-20200728154457258.png)
 
+  **返回信息**
+  
   ```wiki
   Request method:	POST
   Request URI:	http://127.0.0.1:8080/devops/test/httpPostBody
@@ -193,7 +195,142 @@ Rest-Assured 同样能够验证从服务器返回的 HTTP 响应报文，例如�
           "num": 1
       }
   }
-  
+
   ```
+
+##### 验证报文头
+
+#### WebService程序搭建
+
+- 新建springboot工程
+
+-  定义一个webservice接口和实现类，使用@WebService注解标明是一个webservice服务。 
+
+  ```java
+  package com.trs.soapdemo.service;
+  import javax.jws.WebService;
+  @WebService
+  public interface GreetWebService {
+      @WebMethod
+      String greeting(String hello);
+  }
+  
+  
+  package com.trs.soapdemo.service.impl;
+  import com.trs.soapdemo.service.GreetWebService;
+  import javax.jws.WebService;
+  @WebService
+  public class GreetWebServiceImpl implements GreetWebService {
+  
+      @WebMethod
+      @Override
+      public String greeting(String hello) {
+          return "Good Morning:" + hello;
+      }
+  }
+  ```
+
+- 定义的一个bean，这个的意思就是当容器执行完成的时候会去加载run方法的内容
+
+  ```java
+  package com.trs.soapdemo.service;
+  import com.trs.soapdemo.service.impl.GreetWebServiceImpl;
+  import org.springframework.beans.factory.annotation.Value;
+  import org.springframework.boot.ApplicationArguments;
+  import org.springframework.boot.ApplicationRunner;
+  import org.springframework.stereotype.Component;
+  import javax.xml.ws.Endpoint;
+  @Component
+  public class MyListener implements ApplicationRunner {
+      @Value("${webservice.path}")
+      private String path;
+      @Override
+      public void run(ApplicationArguments args) throws Exception {
+          System.out.println("发布地址:"+path);
+          Endpoint.publish(path, new GreetWebServiceImpl());
+          System.out.println("发布成功");
+      }
+  }
+  ```
+
+- 在application.properties中配置上要发布的地址
+
+  ```properties
+  webservice.path=http://127.0.0.1:9090/greet
+  ```
+
+- 启动程序，浏览器访问http://127.0.0.1:9090/greet?wsdl，注意wsdl必须加上，出现XML页面表示发布成功
+
+- 使用postman测试接口，请求头设置为Content-Type=text/xml，请求体为
+
+  ```xml
+  <?xml version="1.0" encoding="utf-8"?>
+  <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <soap:Body>
+          <greeting  xmlns="http://impl.service.soapdemo.trs.com/">
+          	<hello>张三</hello>
+          </greeting>
+      </soap:Body>
+  </soap:Envelope>
+  ```
+
+- 响应结果
+
+  ```xml
+  <?xml version="1.0" ?>
+  <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+      <S:Body>
+          <ns2:greetingResponse xmlns:ns2="http://impl.service.soapdemo.trs.com/">
+              <return>Good Morning:null</return>
+          </ns2:greetingResponse>
+      </S:Body>
+  </S:Envelope>
+  ```
+
+#### Soap协议请求测试
+
+- 
+
+- **接口信息**
+
+  ```json
+  {
+      "路径":"localhost:9090/greet?wsdl",
+      "请求方式":"POST",
+      "协议":"soap"
+      "请求Body":"<?xml version="1.0" encoding="utf-8"?>
+              <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+              <soap:Body>
+              <greeting xmlns="http://impl.service.soapdemo.trs.com/">
+              <hello>张三</hello>
+               </greeting>
+              </soap:Body>
+              </soap:Envelope>",
+      "返回信息":"<?xml version="1.0" encoding="UTF-8"?><S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+                    <S:Body>
+                      <ns2:greetingResponse xmlns:ns2="http://impl.service.soapdemo.trs.com/">
+                        <return>Good Morning:null</return>
+                      </ns2:greetingResponse>
+                    </S:Body>
+                  </S:Envelope>"
+  }
+  ```
+
+  ![image-20200728165035407](Rest-Assured验证.assets/image-20200728165035407.png)
+
+#### Https请求测试
+
+- 测试接口
+
+  ```
+  {
+      "路径":"www.baidu.com",
+      "请求方式":"GET",
+      "请求参数":"wd=盗墓笔记"
+      "协议":"https"
+  }
+  ```
+
+  ![image-20200728172934332](Rest-Assured验证.assets/image-20200728172934332.png)
 
   
