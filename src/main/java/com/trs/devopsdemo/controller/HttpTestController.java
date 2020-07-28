@@ -2,10 +2,7 @@ package com.trs.devopsdemo.controller;
 
 import com.trs.devopsdemo.domain.dto.DTO;
 import com.trs.devopsdemo.entity.JsonBean;
-import com.trs.devopsdemo.service.DevopsAutotestApiManagementService;
-import com.trs.devopsdemo.service.InterfaceService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,13 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @RestController
 @RequestMapping("test")
-public class TestController {
-
-    @Autowired
-    private InterfaceService interfaceService;
-    @Autowired
-    private DevopsAutotestApiManagementService devopsAutotestApiManagementService;
-
+public class HttpTestController {
 
 
     /**

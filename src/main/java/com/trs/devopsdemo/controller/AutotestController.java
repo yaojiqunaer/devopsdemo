@@ -14,7 +14,6 @@ import com.trs.devopsdemo.utils.RequestUtil;
 import com.trs.midend.result.BaseResult;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import io.restassured.response.ValidatableResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
@@ -22,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -267,9 +267,12 @@ public class AutotestController {
 
     @PostMapping("restAssured")
     public JsonBean testRestAssured(@RequestBody Map map) {
-
-        String url = map.get("agreement").toString() + "://" + map.get("url");
-
+        System.out.println(map.get("body").toString());
+        String agreement = map.get("agreement").toString();
+        String url = agreement + "://" + map.get("url");
+        if ("webService".equals(agreement)) {
+            url = "http://" + map.get("url").toString();
+        }
         String param1Name = map.get("param1-name").toString();
         String param1Value = map.get("param1-value").toString();
         String param2Name = map.get("param2-name").toString();
@@ -294,12 +297,12 @@ public class AutotestController {
         headers = this.putKeyValue(headers, header2Name, header2Value);
 
 
-        ValidatableResponse validatableResponse =null;
+        Response response = null;
         if ("GET".equals(map.get("method").toString()) && "http".equals(map.get("agreement").toString())) {
             //http协议 get请求 无参数
             try {
-                 validatableResponse=RequestUtil.sendgetWithHttp(url, params,headers);
-                 log.warn("连接超时异常");
+                response = RequestUtil.sendgetWithHttp(url, params, headers);
+                log.warn("连接超时异常");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -307,17 +310,29 @@ public class AutotestController {
         if ("POST".equals(map.get("method").toString()) && "http".equals(map.get("agreement").toString())) {
             //http协议 get请求 无参数
             try {
-                if(headers!=null&&headers.size()!=0){
-                    Response response = RequestUtil.sendpostWithHttp(url, headers, map.get("body").toString());
-                    return new JsonBean(0,"OK",response.asString());
-                }
+                response = RequestUtil.sendpostWithHttp(url, headers, map.get("body").toString());
             } catch (Exception e) {
                 e.printStackTrace();
                 log.warn("连接超时异常");
             }
         }
-        return new JsonBean(0, "httpGet无参",validatableResponse.extract().response().getBody().asString());
+        HashMap<Object, Object> resMap = new HashMap<>();
+        if ("webService".equals(map.get("agreement").toString())) {
+            //soap
+            try {
+                response = RequestUtil.sendpostWithSoap(url, headers, map.get("body").toString());
+                resMap.put("xml",response.xmlPath().prettyPrint());
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        resMap.put("body", response.getBody().toString());
+        resMap.put("headers", response.getHeaders().toString());
+        resMap.put("time", response.getTime());
+        return new JsonBean(0, "httpGet无参", resMap.toString());
     }
+
 
     private Map putKeyValue(Map map, String key, String value) {
         if (!StringUtils.isEmpty(key) && !StringUtils.isEmpty(value)) {

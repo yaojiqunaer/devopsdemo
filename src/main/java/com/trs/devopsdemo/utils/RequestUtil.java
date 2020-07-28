@@ -1,8 +1,8 @@
 package com.trs.devopsdemo.utils;
 
 import io.restassured.response.Response;
-import io.restassured.response.ValidatableResponse;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
 import java.util.Objects;
@@ -12,71 +12,58 @@ import static io.restassured.RestAssured.useRelaxedHTTPSValidation;
 
 public class RequestUtil {
 
-    public static Response sendpostWithHttp(String surl,Map headers, String dto) throws Exception {
-        String msg = null;
+
+    public static Response sendpostWithSoap(String surl,Map headers,String body) throws MalformedURLException {
         URL url = new URL(surl);
-        Response response = given().log().all().
+        headers.put("Content-Type","text/xml");
+        return given().headers(headers)
+                .body(body)
+                .then().when()
+                .post(url);
+    }
+
+    public static Response sendpostWithHttp(String surl, Map headers, String dto) throws MalformedURLException {
+        URL url = new URL(surl);
+        Response response = given().
                 headers(headers).
                 body(dto).
                 then().
                 when().
                 post(url);
-        response.getBody().prettyPrint();
-
         return response;
     }
 
-    public static ValidatableResponse sendgetWithHttp(String surl, Map params,Map headers) throws Exception {
+    public static Response sendgetWithHttp(String surl, Map params, Map headers) throws MalformedURLException {
         URL url = new URL(surl);
-        ValidatableResponse response = null;
-        if (Objects.isNull(params) || params.size() == 0) {
-            //无参数
-            if(Objects.isNull(headers)||headers.size()==0){
-                //无headers
-                response = given()
-                        .when() .log().all()
-                        .get(surl)
-                        .then()
-                        .log().all();
-            }else {
-                response = given()
-                        .headers(headers)
-                        .log().all()
+        if (isMapEmpty(params)){//无参请求
+            if(isMapEmpty(headers)){//无headers
+                return given()
                         .when()
-                        .get(surl)
-                        .then()
-                        .log().all();
+                        .get(surl);
             }
-        } else {
-            //有参数
-            if(Objects.isNull(headers)||headers.size()==0){
-                response = given()
-                        .log().all()
-                        .queryParams(params)
-                        .when()
-                        .get(surl)
-                        .then()
-                        .log().all();
-            }else {
-                response = given()
-                        .headers(headers)
-                        .log().all()
-                        .queryParams(params)
-                        .when()
-                        .get(surl)
-                        .then()
-                        .log().all();
-            }
-
+            //无参有headers
+            return given()
+                    .headers(headers)
+                    .when()
+                    .get(surl);
         }
-        return response;
+        if(isMapEmpty(headers)){//有参数无headers
+            return given()
+                    .queryParams(params)
+                    .when()
+                    .get(surl);
+        }
+        return given()
+                .headers(headers)
+                .queryParams(params)
+                .when()
+                .get(surl);
     }
 
-    public static Response sendpostWithHttps(String surl,Map headers, Map body) throws Exception {
+    public static Response sendpostWithHttps(String surl, Map headers, Map body) throws Exception {
         URL url = new URL(surl);
         useRelaxedHTTPSValidation();
         Response response = given().
-                log().all().
                 headers(headers).
                 body(body).
                 then().
@@ -86,17 +73,19 @@ public class RequestUtil {
         return response;
     }
 
-    public static ValidatableResponse sendgetWithHttps(String surl, String str) throws Exception {
+    public static Response sendgetWithHttps(String surl, String str) throws MalformedURLException {
         URL url = new URL(surl);
         useRelaxedHTTPSValidation();
-        ValidatableResponse response = given()
-                .log().all()
+        Response response = given()
                 .queryParam(str)
                 .when()
-                .get(surl)
-                .then()
-                .log().all()
-                .statusCode(200);
+                .get(url);
         return response;
     }
+
+
+    private static boolean isMapEmpty(Map map) {
+        return Objects.isNull(map) || map.size() == 0;
+    }
+
 }
