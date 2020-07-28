@@ -269,7 +269,7 @@ public class AutotestController {
     public JsonBean testRestAssured(@RequestBody Map map) {
         System.out.println(map.get("body").toString());
         String agreement = map.get("agreement").toString();
-        String url = agreement + "://" + map.get("url");
+        String url = agreement + "://" + map.get("url").toString();
         if ("webService".equals(agreement)) {
             url = "http://" + map.get("url").toString();
         }
@@ -298,11 +298,13 @@ public class AutotestController {
 
 
         Response response = null;
+        HashMap<Object, Object> resMap = new HashMap<>();
 
         if("GET".equals(map.get("method").toString()) &&"https".equals(map.get("agreement").toString())){
             //https get请求
             try {
                 response = RequestUtil.sendgetWithHttps(url, headers, params);
+                resMap.put("https==========",response.prettyPrint());
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
@@ -325,7 +327,6 @@ public class AutotestController {
                 log.warn("连接超时异常");
             }
         }
-        HashMap<Object, Object> resMap = new HashMap<>();
         if ("webService".equals(map.get("agreement").toString())) {
             //soap
             try {
@@ -339,7 +340,7 @@ public class AutotestController {
         resMap.put("body", response.getBody().toString());
         resMap.put("headers", response.getHeaders().toString());
         resMap.put("time", response.getTime());
-        return new JsonBean(0, "httpGet无参", resMap.toString());
+        return new JsonBean(0, "OK", resMap.toString());
     }
 
 
