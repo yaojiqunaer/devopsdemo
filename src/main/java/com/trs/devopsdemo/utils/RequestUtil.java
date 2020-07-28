@@ -60,7 +60,7 @@ public class RequestUtil {
                 .get(surl);
     }
 
-    public static Response sendpostWithHttps(String surl, Map headers, Map body) throws Exception {
+    public static Response sendpostWithHttps(String surl, Map headers, String body) throws Exception {
         URL url = new URL(surl);
         useRelaxedHTTPSValidation();
         Response response = given().
@@ -73,11 +73,12 @@ public class RequestUtil {
         return response;
     }
 
-    public static Response sendgetWithHttps(String surl, String str) throws MalformedURLException {
+    public static Response sendgetWithHttps(String surl,Map headers, Map params) throws MalformedURLException {
         URL url = new URL(surl);
         useRelaxedHTTPSValidation();
         Response response = given()
-                .queryParam(str)
+                .queryParams(params)
+                .headers(headers)
                 .when()
                 .get(url);
         return response;

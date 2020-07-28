@@ -298,6 +298,15 @@ public class AutotestController {
 
 
         Response response = null;
+
+        if("GET".equals(map.get("method").toString()) &&"https".equals(map.get("agreement").toString())){
+            //https get请求
+            try {
+                response = RequestUtil.sendgetWithHttps(url, headers, params);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+        }
         if ("GET".equals(map.get("method").toString()) && "http".equals(map.get("agreement").toString())) {
             //http协议 get请求 无参数
             try {
