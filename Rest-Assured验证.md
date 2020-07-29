@@ -43,15 +43,6 @@ Rest-Assured 同样能够验证从服务器返回的 HTTP 响应报文，例如�
    
    import javax.servlet.http.HttpServletRequest;
    
-   /**
-    * @Title TestController
-    * @Description:
-    * @Create Date: 2020/7/27 13:33
-    * @Author Zhenjin.Zhang
-    * @Contact: zhang.zhenjin@trs.com.cn
-    * @Company: 成都拓尔思信息技术有限公司
-    * @Department: 中台（Middle-End）
-    */
    @Slf4j
    @RestController
    @RequestMapping("test")
@@ -90,7 +81,7 @@ Rest-Assured 同样能够验证从服务器返回的 HTTP 响应报文，例如�
    }
    
    ```
-
+   
 4. 测试接口的返回
 
    ```java
@@ -506,7 +497,7 @@ Rest-Assured 同样能够验证从服务器返回的 HTTP 响应报文，例如�
 
   **待测接口信息**
 
-  ```json
+  ```
   {
       "路径":"127.0.0.1:8080/devops/test/httpGetHeaders",
       "请求方式":"GET",
@@ -538,7 +529,7 @@ Rest-Assured 同样能够验证从服务器返回的 HTTP 响应报文，例如�
 
   **接口信息**
 
-  ```json
+  ```
   {
       "路径":"127.0.0.1:8080/devops/test/httpPostBody",
       "请求方式":"POST",
@@ -577,8 +568,7 @@ Rest-Assured 同样能够验证从服务器返回的 HTTP 响应报文，例如�
           "num": 1
       }
   }
-```
-
+  ```
 #### WebService简介
 
 - WebService采用Http协议来在客户端和服务端之间传输数据。WebService使用XML来封装数据，XML主要的优点在于它是跨平台的。
@@ -591,30 +581,30 @@ Rest-Assured 同样能够验证从服务器返回的 HTTP 响应报文，例如�
 
 - 新建springboot工程-- https://github.com/yaojiqunaer/soapdemo 
 
--  定义一个webservice接口和实现类，使用@WebService注解标明是一个webservice服务。 
+- 定义一个webservice接口和实现类，使用@WebService注解标明是一个webservice服务。 
 
   ```java
-  package com.trs.soapdemo.service;
-  import javax.jws.WebService;
-  @WebService
-  public interface GreetWebService {
-      @WebMethod
-      String greeting(String hello);
-  }
-  
-  
-  package com.trs.soapdemo.service.impl;
-  import com.trs.soapdemo.service.GreetWebService;
-  import javax.jws.WebService;
-  @WebService
-  public class GreetWebServiceImpl implements GreetWebService {
-  
-      @WebMethod
-      @Override
-      public String greeting(String hello) {
-          return "Good Morning:" + hello;
-      }
-  }
+   package com.trs.soapdemo.service;
+    import javax.jws.WebService;
+    @WebService
+    public interface GreetWebService {
+        @WebMethod
+        String greeting(String hello);
+    }
+    
+    
+    package com.trs.soapdemo.service.impl;
+    import com.trs.soapdemo.service.GreetWebService;
+    import javax.jws.WebService;
+    @WebService
+    public class GreetWebServiceImpl implements GreetWebService {
+    
+        @WebMethod
+        @Override
+        public String greeting(String hello) {
+            return "Good Morning:" + hello;
+        }
+    }
   ```
 
 - 定义的一个bean，这个的意思就是当容器执行完成的时候会去加载run方法的内容
@@ -718,19 +708,12 @@ SOAP结构
 
   ![image-20200728165035407](Rest-Assured验证.assets/image-20200728165035407.png)
 
-- 返回信息
-
-  ```
-  
-  ```
-
-  
 
 #### Https请求测试
 
 - 测试接口
 
-  ```json
+  ```
   {
   	"描述":"测试百度搜索(百度防爬虫需加两个请求头参数)",
       "路径":"www.baidu.com/s",
@@ -740,8 +723,9 @@ SOAP结构
       "请求头2":"User-Agent=Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3775.400 QQBrowser/10.6.4208.400",
     "协议":"https"
   }
-```
-  
+  ```
+
+
   ![image-20200728235020268](Rest-Assured验证.assets/image-20200728235020268.png)
 
 - 响应结果
