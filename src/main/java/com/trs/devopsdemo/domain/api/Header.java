@@ -1,4 +1,4 @@
-package com.trs.devopsdemo.domain.dto;
+package com.trs.devopsdemo.domain.api;
 
 import lombok.Data;
 
@@ -12,8 +12,10 @@ import lombok.Data;
  * @Department: 中台（Middle-End）
  */
 @Data
-public class ReqHeaders {
+public class Header {
 
     private String name;
     private String value;
+    private String example;
+    private String description;
 }

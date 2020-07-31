@@ -2,7 +2,7 @@ package com.trs.devopsdemo.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.trs.devopsdemo.domain.dto.ApiDTO;
+import com.trs.devopsdemo.domain.api.ApiDTO;
 import com.trs.devopsdemo.domain.model.DevopsAutotestApiGroup;
 import com.trs.devopsdemo.domain.page.Page;
 import com.trs.devopsdemo.entity.JsonBean;

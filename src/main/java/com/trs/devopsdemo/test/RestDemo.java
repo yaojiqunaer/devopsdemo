@@ -7,6 +7,8 @@ import org.junit.Test;
 import java.util.HashMap;
 import java.util.Map;
 
+import static io.restassured.path.json.JsonPath.from;
+
 /**
  * @Title RestDemo
  * @Description:
@@ -21,7 +23,6 @@ public class RestDemo {
     @Test
     public void test(){
 
-        //
         Map form=new HashMap<>();
         form.put("username","admin");
         form.put("password","1907836146");
@@ -29,7 +30,6 @@ public class RestDemo {
         headers.put("X-User-Token","xxxx");
         headers.put("Content-Type","application/json");
         Map body=new HashMap();
-
 
         Response response = RestAssured
                 .given()
@@ -44,6 +44,7 @@ public class RestDemo {
                 .extract()
                 .response();
 
+        System.out.println((String) from(response.asString()).get("resultCode.code"));
         System.out.println("================"+response.getBody().asString());
 
     }

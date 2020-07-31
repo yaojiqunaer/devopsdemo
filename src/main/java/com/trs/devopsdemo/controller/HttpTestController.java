@@ -1,6 +1,7 @@
 package com.trs.devopsdemo.controller;
 
-import com.trs.devopsdemo.domain.dto.DTO;
+import com.alibaba.fastjson.JSONObject;
+import com.trs.devopsdemo.domain.DTO;
 import com.trs.devopsdemo.entity.JsonBean;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -51,5 +52,27 @@ public class HttpTestController {
     public JsonBean httpPostBody(@RequestBody DTO dto){
         return new JsonBean(0,"OK",dto);
     }
+
+
+    @GetMapping("getToken")
+    public JsonBean getToken(String username,String password){
+        return new JsonBean(0,"OK", JSONObject.parse("\"token\":\"asdfghjkl\""));
+    }
+
+
+    @PostMapping("addUser")
+    public JsonBean addUser(String token){
+        return new JsonBean(0,"OK",JSONObject.parse("\"userId\":\"123\""));
+    }
+
+    @GetMapping("delUser")
+    public JsonBean delUser(String token,Integer id){
+        return new JsonBean(0,"OK",null);
+    }
+
+
+
+
+
 
 }
