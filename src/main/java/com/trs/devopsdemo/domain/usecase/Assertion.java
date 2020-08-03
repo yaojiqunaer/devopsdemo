@@ -15,6 +15,9 @@ import lombok.Data;
 @Data
 public class Assertion {
     private String name;
+    private String value;
+    private String type;
+
     private String source;
     private String property;
     private String comparison;

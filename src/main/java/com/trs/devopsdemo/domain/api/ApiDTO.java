@@ -29,6 +29,6 @@ public class ApiDTO {
     private List<Form> reqForm;//表单Form参数
     private List<Query> reqQuery;//请求参数集合
     private List<Header> reqHeaders;//请求头集合
-    private List<Assertion>  apiAssertions;//断言
+    private Assertion  apiAssertions;//断言
 
 }

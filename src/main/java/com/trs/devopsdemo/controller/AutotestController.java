@@ -2,9 +2,17 @@ package com.trs.devopsdemo.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.trs.devopsdemo.apitest.RequestExecutor;
 import com.trs.devopsdemo.domain.api.ApiDTO;
+import com.trs.devopsdemo.domain.api.Form;
+import com.trs.devopsdemo.domain.api.Header;
+import com.trs.devopsdemo.domain.api.Query;
 import com.trs.devopsdemo.domain.model.DevopsAutotestApiGroup;
 import com.trs.devopsdemo.domain.page.Page;
+import com.trs.devopsdemo.domain.usecase.Assertion;
+import com.trs.devopsdemo.domain.usecase.ReqBody;
+import com.trs.devopsdemo.domain.usecase.ReqData;
+import com.trs.devopsdemo.domain.usecase.UsecaseDTO;
 import com.trs.devopsdemo.entity.JsonBean;
 import com.trs.devopsdemo.filter.SessionLocal;
 import com.trs.devopsdemo.service.DevopsAutotestApiManagementService;
@@ -22,10 +30,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
+
+import static org.hamcrest.Matchers.equalTo;
 
 /**
  * @Title AutotestController
@@ -300,11 +307,11 @@ public class AutotestController {
         Response response = null;
         HashMap<Object, Object> resMap = new HashMap<>();
 
-        if("GET".equals(map.get("method").toString()) &&"https".equals(map.get("agreement").toString())){
+        if ("GET".equals(map.get("method").toString()) && "https".equals(map.get("agreement").toString())) {
             //https get请求
             try {
                 response = RequestUtil.sendgetWithHttps(url, headers, params);
-                resMap.put("https==========",response.prettyPrint());
+                resMap.put("https==========", response.prettyPrint());
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
@@ -331,7 +338,7 @@ public class AutotestController {
             //soap
             try {
                 response = RequestUtil.sendpostWithSoap(url, headers, map.get("body").toString());
-                resMap.put("xml",response.xmlPath().prettyPrint());
+                resMap.put("xml", response.xmlPath().prettyPrint());
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
@@ -343,6 +350,98 @@ public class AutotestController {
         return new JsonBean(0, "OK", resMap.toString());
     }
 
+    @PostMapping("executeInterface")
+    public JsonBean executeInterface(@RequestBody ApiDTO apiDTO) {
+
+        RequestExecutor executor = new RequestExecutor(apiDTO);
+        Long t1 = System.currentTimeMillis();
+        com.jayway.restassured.response.Response response = executor.executeHttpRequest();//执行
+        log.info("返回的值为{}", response.body().asString());
+        Assertion apiAssertions = apiDTO.getApiAssertions();
+        //断言
+        if (!Objects.isNull(apiAssertions)) {
+            try {
+                if ("等于".equals(apiAssertions.getType())) {
+                    String s = apiAssertions.getName().split("$.")[0];
+                    response.then().body(s, equalTo("你好"));
+                }
+                if ("包含".equals(apiAssertions.getType())) {
+
+                }
+            } catch (AssertionError e) {
+                log.info("==========================={}", "断言失败");
+            }
+        }
+        return new JsonBean(0, "OK", response.asString() + "=======" + (System.currentTimeMillis() - t1));
+    }
+
+
+    @PostMapping("executeUsecase")
+    public JsonBean executeUsecase(@RequestBody UsecaseDTO usecaseDTO) {
+
+        usecaseDTO.getRequests().stream().forEach(request -> {
+
+            ApiDTO apiDTO = getApiDTOById(request.getApiId());
+            List<ReqData> reqData = request.getData();
+            reqData.stream().forEach(data->{
+                List<Query> query = data.getQuery();
+                Assertion assertion = data.getAssertion();
+                ReqBody body = data.getBody();
+
+                apiDTO.
+
+
+                RequestExecutor requestExecutor=new RequestExecutor(apiDTO);
+
+            });
+        });
+
+
+        return new JsonBean(0, "OK", null);
+
+    }
+
+
+    private ApiDTO getApiDTOById(Long id) {
+        ApiDTO apiDTO = new ApiDTO();
+        if ("3".equals(id)) {
+            //模拟查询到id为3的接口信息 login接口
+            apiDTO.setApiId(id);
+            apiDTO.setMethod("POST");
+            apiDTO.setName("登录接口");
+            apiDTO.setPath("http://localhost:8080/devops/test/login");
+            ArrayList<Form> form = new ArrayList<>();
+            Form form1 = new Form();
+            form1.setName("username");
+            form1.setExample("zs");
+            Form form2 = new Form();
+            form2.setName("password");
+            form2.setExample("123");
+            form.add(form1);
+            form.add(form2);
+            apiDTO.setReqForm(form);
+            List<Header> headers = new ArrayList<>();
+            List<Query> queries = new ArrayList<>();
+            apiDTO.setReqHeaders(headers);
+            apiDTO.setReqQuery(queries);
+        }
+        if ("7".equals(id)) {
+            //模拟查询到id为7的接口信息 查询用户接口
+            apiDTO.setApiId(id);
+            apiDTO.setMethod("POST");
+            apiDTO.setName("登录接口");
+            apiDTO.setPath("http://localhost:8080/devops/test/getUsers");
+            ArrayList<Form> form = new ArrayList<>();
+            List<Header> headers = new ArrayList<>();
+            Query query=new Query();
+            List<Query> queries = new ArrayList<>();
+            apiDTO.setReqForm(form);
+            apiDTO.setReqHeaders(headers);
+            apiDTO.setReqQuery(queries);
+            apiDTO.setResBody("");
+        }
+        return apiDTO;
+    }
 
     private Map putKeyValue(Map map, String key, String value) {
         if (!StringUtils.isEmpty(key) && !StringUtils.isEmpty(value)) {
@@ -350,5 +449,10 @@ public class AutotestController {
         }
         return map;
     }
+//
+//    public static void main(String[] args) {
+//        String s="$.data.title";
+//        System.out.println(s.replaceAll("$.",""));
+//    }
 
 }
