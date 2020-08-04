@@ -2,7 +2,6 @@ package com.trs.devopsdemo.apitest;
 
 import com.trs.devopsdemo.domain.api.ApiDTO;
 import io.restassured.RestAssured;
-import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.session.SessionFilter;
 import io.restassured.http.Header;
 import io.restassured.response.Response;
@@ -22,11 +21,21 @@ public class RequestExecutor {
 
     private RequestSpecification requestSpecification;
 
+//    static {
+//        RestAssured.config = RestAssured.config().httpClient(httpClientConfig().httpClientFactory(
+//                new HttpClientConfig.HttpClientFactory() {
+//                    @Override
+//                    public HttpClient createHttpClient() {
+//                        return new SystemDefaultHttpClient();
+//                    }
+//                }));
+//    }
+
+    private static SessionFilter sessionFilter = new SessionFilter();
+
     public RequestExecutor(ApiDTO apiDTO) {
         this.apiDTO = apiDTO;
-        //io.restassured.RestAssured.sessionId="124365876547";
-        requestSpecification= new RequestSpecBuilder().addFilter(new SessionFilter()).build();
-        requestSpecification = given();
+        requestSpecification = given().filter(sessionFilter);
         trustAllHosts();
         applyHeaders();
         applyQueryParameters();
