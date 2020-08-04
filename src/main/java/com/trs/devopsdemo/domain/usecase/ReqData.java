@@ -1,5 +1,7 @@
 package com.trs.devopsdemo.domain.usecase;
 
+import com.trs.devopsdemo.domain.api.Form;
+import com.trs.devopsdemo.domain.api.Header;
 import com.trs.devopsdemo.domain.api.Query;
 import lombok.Data;
 
@@ -20,7 +22,9 @@ public class ReqData {
     private String uuid;
     private String title;
     private List<Query> query;
+    private List<Form> form;//表单Form参数
     private ReqBody body;
+    private List<Header> header;
     private Assertion assertion;
 
 }

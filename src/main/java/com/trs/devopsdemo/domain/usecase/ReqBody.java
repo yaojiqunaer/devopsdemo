@@ -1,5 +1,7 @@
 package com.trs.devopsdemo.domain.usecase;
 
+import lombok.Data;
+
 /**
  * @Title ReqBody
  * @Description: 接口请求的body数据
@@ -9,6 +11,7 @@ package com.trs.devopsdemo.domain.usecase;
  * @Company: 成都拓尔思信息技术有限公司
  * @Department: 中台（Middle-End）
  */
+@Data
 public class ReqBody {
 
     private Integer type;//0为常量，1为接口返回

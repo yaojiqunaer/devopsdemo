@@ -2,6 +2,7 @@ package com.trs.devopsdemo.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.jayway.jsonpath.JsonPath;
 import com.trs.devopsdemo.apitest.RequestExecutor;
 import com.trs.devopsdemo.domain.api.ApiDTO;
 import com.trs.devopsdemo.domain.api.Form;
@@ -31,6 +32,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.Matchers.equalTo;
 
@@ -352,14 +355,14 @@ public class AutotestController {
 
     @PostMapping("executeInterface")
     public JsonBean executeInterface(@RequestBody ApiDTO apiDTO) {
-
         RequestExecutor executor = new RequestExecutor(apiDTO);
         Long t1 = System.currentTimeMillis();
-        com.jayway.restassured.response.Response response = executor.executeHttpRequest();//执行
+
+        Response response = executor.executeHttpRequest();//执行
         log.info("返回的值为{}", response.body().asString());
         Assertion apiAssertions = apiDTO.getApiAssertions();
         //断言
-        if (!Objects.isNull(apiAssertions)) {
+        if (Objects.nonNull(apiAssertions)) {
             try {
                 if ("等于".equals(apiAssertions.getType())) {
                     String s = apiAssertions.getName().split("$.")[0];
@@ -379,19 +382,82 @@ public class AutotestController {
     @PostMapping("executeUsecase")
     public JsonBean executeUsecase(@RequestBody UsecaseDTO usecaseDTO) {
 
-        usecaseDTO.getRequests().stream().forEach(request -> {
-
-            ApiDTO apiDTO = getApiDTOById(request.getApiId());
+        AtomicInteger index = new AtomicInteger(0);//自增索引
+        usecaseDTO.getRequests().forEach(request -> {
+            ApiDTO apiDTO = getApiDTOById(request.getApiId());//接口信息
             List<ReqData> reqData = request.getData();
-            reqData.stream().forEach(data->{
+            reqData.forEach(data -> {
+                index.getAndIncrement();
+                //处理query数据 判断是否包含接口返回
                 List<Query> query = data.getQuery();
+//                if (query.size() != 0) {
+//                    //含query
+//                    query = query.stream().map(x -> {
+//                        if (x.getType() == 1) {
+//                            //处理接口返回
+//                            return x;
+//                        }
+//                        return x;
+//                    }).collect(Collectors.toList());
+//                }
+
+                //处理header数据 判断是否包含接口返回
+                List<Header> headers = data.getHeader();
+                if (Objects.nonNull(headers) && headers.size() != 0) {
+                    headers = headers.stream().map(x -> {
+                        if (x.getType() == 1) {//处理接口返回数据 暂时从static中获取
+                            String jsonPath = x.getValue();//例：$.uuid.data.token
+                            String uuid = jsonPath.split("\\.")[1];
+                            String resBody = AutotestController.reqData.get(uuid);//根据uuid获取
+                            String read = JsonPath.parse(resBody).read(jsonPath.replaceAll(uuid + ".", ""));//需要替换的值
+                            x.setValue(read);
+                            log.info("接口返回数据{}替换{}",read,jsonPath);
+                            return x;
+                        }
+                        return x;
+                    }).collect(Collectors.toList());
+                }
                 Assertion assertion = data.getAssertion();
+                //处理body数据 判断是否包含接口返回
                 ReqBody body = data.getBody();
+                if (Objects.nonNull(body.getType()) && body.getType() == 0) {
+                    //常量
+                }
 
-                apiDTO.
 
+                List<Form> forms = data.getForm();
+                if (Objects.nonNull(forms) && forms.size() != 0) {
+                    forms = forms.stream().map(y -> {
+                        if (y.getType() == 1) {//处理接口返回数据 暂时从static中获取
+                            String jsonPath = y.getValue();//例：$.uuid.data.token
+                            String uuid = jsonPath.split("\\.")[1];
+                            String resBody = AutotestController.reqData.get(uuid);//根据uuid获取
+                            String read = JsonPath.parse(resBody).read(jsonPath.replaceAll(uuid + ".", ""));//需要替换的值
+                            y.setValue(read);
+                            log.info("接口返回数据{}替换{}",read,jsonPath);
+                            return y;
+                        }
+                        return y;
+                    }).collect(Collectors.toList());
+                }
 
-                RequestExecutor requestExecutor=new RequestExecutor(apiDTO);
+                apiDTO.setReqQuery(query);
+                apiDTO.setReqBody(body.getValue());
+                apiDTO.setReqHeaders(headers);
+                apiDTO.setReqForm(forms);
+
+                //执行当前数据请求
+                RequestExecutor requestExecutor = new RequestExecutor(apiDTO);
+                try {
+                    Response response = requestExecutor.executeHttpRequest();
+                    String resBody = response.asString();
+                    log.info("请求{}执行完毕 响应结果{}", index,resBody);
+
+                    AutotestController.reqData.put(data.getUuid(), resBody);
+
+                } catch (UnsupportedOperationException e) {
+
+                }
 
             });
         });
@@ -402,9 +468,12 @@ public class AutotestController {
     }
 
 
+    private static Map<String, String> reqData = new HashMap();
+
+
     private ApiDTO getApiDTOById(Long id) {
         ApiDTO apiDTO = new ApiDTO();
-        if ("3".equals(id)) {
+        if (id == 3) {
             //模拟查询到id为3的接口信息 login接口
             apiDTO.setApiId(id);
             apiDTO.setMethod("POST");
@@ -420,20 +489,21 @@ public class AutotestController {
             form.add(form1);
             form.add(form2);
             apiDTO.setReqForm(form);
+            apiDTO.setReqBodyType("form");
             List<Header> headers = new ArrayList<>();
             List<Query> queries = new ArrayList<>();
             apiDTO.setReqHeaders(headers);
             apiDTO.setReqQuery(queries);
         }
-        if ("7".equals(id)) {
+        if (id == 7) {
             //模拟查询到id为7的接口信息 查询用户接口
             apiDTO.setApiId(id);
-            apiDTO.setMethod("POST");
-            apiDTO.setName("登录接口");
+            apiDTO.setMethod("GET");
+            apiDTO.setName("查询用户信息");
             apiDTO.setPath("http://localhost:8080/devops/test/getUsers");
             ArrayList<Form> form = new ArrayList<>();
             List<Header> headers = new ArrayList<>();
-            Query query=new Query();
+            Query query = new Query();
             List<Query> queries = new ArrayList<>();
             apiDTO.setReqForm(form);
             apiDTO.setReqHeaders(headers);
@@ -449,10 +519,51 @@ public class AutotestController {
         }
         return map;
     }
+
+    public static void main(String[] args) {
+
+
+        String jsonPath = "$.123456.data.token";//例：$.uuid.data.token
+        String uuid = jsonPath.split("\\.")[1];
+        String resBody = "{\n" +
+                "            \"code\":1,\n" +
+                "            \"data\":{\n" +
+                "                \"token\":\"2132\"\n" +
+                "            }\n" +
+                "        }";//根据uuid获取
+        String read = JsonPath.parse(resBody).read(jsonPath.replaceAll(uuid + ".", ""));//替换的值
+        System.out.println(read);
+
+
+//        String s = "$.123456.data.token";
+//        String uuid = s.split("\\.")[1];
+//        System.out.println(uuid);
+//        System.out.println(s.replaceAll(uuid + ".", ""));
+    }
 //
 //    public static void main(String[] args) {
 //        String s="$.data.title";
 //        System.out.println(s.replaceAll("$.",""));
 //    }
 
+
+//    public static void main(String[] args) {
+//        List<String> list = new ArrayList<String>();
+//        list.add("a");
+//        list.add("b");
+//        list.add("c");
+//        //用map来实现多重条件过滤
+//        List<String> collect = list.stream().map((x) -> {
+//            if (x.contains("a")) {
+//                return x.replace("a", "1");
+//            }
+//            if (x.contains("b")) {
+//                return x.replace("b", "2");
+//            }
+//            return x;
+//        }).collect(Collectors.toList());
+//        collect.forEach(System.out::println);
+//
+//
+//    }
 }

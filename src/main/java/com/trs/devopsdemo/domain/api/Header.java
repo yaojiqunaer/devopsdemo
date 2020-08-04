@@ -18,4 +18,6 @@ public class Header {
     private String value;
     private String example;
     private String description;
+
+    private Integer type = 0;//0为常量 1为接口返回
 }

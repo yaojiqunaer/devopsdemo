@@ -79,12 +79,11 @@ public class HttpTestController {
     }
 
 
-
-
     //用例测试
     @PostMapping("login")
     public JsonBean login(String username, String password, HttpServletRequest request) {
 
+        System.out.println("login:sessionId"+request.getSession().getId());
         if ("admin".equals(username) && "123456".equals(password)) {
             String token = Token.createTokenByUsernamePassword(username, password);
             request.getSession().setAttribute("token", token);
@@ -96,13 +95,21 @@ public class HttpTestController {
 
     @GetMapping("getUsers")
     public JsonBean getUsers(HttpServletRequest request) {
-        if (request.getHeader("X-User-Token").equals(request.getSession().getAttribute("token"))) {
+        System.out.println("getUsers:sessionId"+request.getSession().getId());
+        System.out.println("header:" + request.getHeader("X-User-Token"));
+        System.out.println("session:" + request.getSession().getAttribute("token"));
+        if (request.getHeader("X-User-Token").equals(request.getSession().getAttribute("token").toString())) {
             User user1 = new User("张三", "男", 23);
             User user2 = new User("李四", "男", 44);
             User user3 = new User("王五", "女", 50);
             User user4 = new User("赵六", "男", 77);
             User user5 = new User("小七", "女", 18);
             List<User> objects = new ArrayList<>();
+            objects.add(user1);
+            objects.add(user2);
+            objects.add(user3);
+            objects.add(user4);
+            objects.add(user5);
             return new JsonBean(0, "OK", objects);
         }
         return new JsonBean(-1, "未登录", null);

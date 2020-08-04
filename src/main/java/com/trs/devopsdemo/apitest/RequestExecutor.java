@@ -1,16 +1,16 @@
 package com.trs.devopsdemo.apitest;
 
-import com.jayway.restassured.RestAssured;
-import com.jayway.restassured.response.Header;
-import com.jayway.restassured.response.Response;
-import com.jayway.restassured.specification.RequestSpecification;
 import com.trs.devopsdemo.domain.api.ApiDTO;
+import io.restassured.RestAssured;
+import io.restassured.http.Header;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import lombok.extern.slf4j.Slf4j;
 
-import static com.jayway.restassured.RestAssured.given;
-import static com.jayway.restassured.config.JsonConfig.jsonConfig;
-import static com.jayway.restassured.config.SSLConfig.sslConfig;
-import static com.jayway.restassured.path.json.config.JsonPathConfig.NumberReturnType.BIG_DECIMAL;
+import static io.restassured.RestAssured.given;
+import static io.restassured.config.JsonConfig.jsonConfig;
+import static io.restassured.config.SSLConfig.sslConfig;
+import static io.restassured.path.json.config.JsonPathConfig.NumberReturnType.BIG_DECIMAL;
 
 
 @Slf4j
@@ -20,72 +20,72 @@ public class RequestExecutor {
 
     private RequestSpecification requestSpecification;
 
-
-    public RequestExecutor(ApiDTO apiDTO){
+    public RequestExecutor(ApiDTO apiDTO) {
         this.apiDTO = apiDTO;
+        io.restassured.RestAssured.sessionId="124365876547";
         requestSpecification = given();
         trustAllHosts();
         applyHeaders();
         applyQueryParameters();
-         if (apiDTO.getMethod().equalsIgnoreCase("post")){
-            if ("form".equalsIgnoreCase(apiDTO.getReqBodyType())){
+        if ("post".equalsIgnoreCase(apiDTO.getMethod())) {
+            if ("form".equalsIgnoreCase(apiDTO.getReqBodyType())) {
                 applyFormParam();
-            }else if ("json".equalsIgnoreCase(apiDTO.getReqBodyType())){
+            } else if ("json".equalsIgnoreCase(apiDTO.getReqBodyType())) {
                 applyRawParam();
             }
         }
     }
 
     //trust all hosts regardless if the SSL certificate is invalid
-    private void trustAllHosts(){
+    private void trustAllHosts() {
         RestAssured.config = RestAssured.config().sslConfig(sslConfig().relaxedHTTPSValidation());
-        RestAssured.config =  RestAssured.config().jsonConfig(jsonConfig().numberReturnType(BIG_DECIMAL));
+        RestAssured.config = RestAssured.config().jsonConfig(jsonConfig().numberReturnType(BIG_DECIMAL));
         requestSpecification.config(RestAssured.config);
 
     }
 
-    private void applyHeaders(){
+    private void applyHeaders() {
         apiDTO.getReqHeaders().stream()
-                .forEach(x->{
-                    if (x.getName().equalsIgnoreCase("cookie")){
+                .forEach(x -> {
+                    if (x.getName().equalsIgnoreCase("cookie")) {
                         String[] cookies = x.getValue().split(";");
-                        for (String s:cookies){
+                        for (String s : cookies) {
                             String[] c = x.getValue().split("=");
                             requestSpecification.cookie(c[0], c[1]);
                         }
-                    }else {
+                    } else {
                         requestSpecification.header(new Header(x.getName(), x.getValue()));
                     }
                 });
     }
 
-    private void applyQueryParameters(){
+    private void applyQueryParameters() {
         apiDTO.getReqQuery().stream()
-                .forEach(x->{
+                .forEach(x -> {
                     requestSpecification.params(x.getName(), x.getValue());
                 });
     }
 
-    private void applyFormParam(){
+    private void applyFormParam() {
         apiDTO.getReqForm().stream()
                 .forEach(
-                        x->{
+                        x -> {
                             log.info(x.getName() + "-------" + x.getValue());
                             requestSpecification = requestSpecification.formParam(x.getName(), x.getValue());
                         }
                 );
     }
 
-    private void applyRawParam(){
+    private void applyRawParam() {
         requestSpecification = requestSpecification.body(apiDTO.getReqBody());
     }
 
     /**
+     * @param
+     * @return
      * @description 执行http请求
-     * @param 
-     * @return 
      */
-    public Response executeHttpRequest(){
+    public Response executeHttpRequest() {
         Response response = null;
         switch (apiDTO.getMethod().toUpperCase()) {
             case "GET":
@@ -110,7 +110,8 @@ public class RequestExecutor {
                 response = requestSpecification.when().head(apiDTO.getPath());
                 break;
             default:
-                throw new UnsupportedOperationException(String.format("We cannot perform a request of type %s.", apiDTO.getPath()));
+                throw new UnsupportedOperationException(String.format("We cannot perform a request of type %s.",
+                        apiDTO.getPath()));
         }
         return response;
     }

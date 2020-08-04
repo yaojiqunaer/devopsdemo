@@ -15,7 +15,7 @@ import lombok.Data;
 public class Query {
 
     private String name;
-    private String type;
+    private Integer type;
     private String example;
     private String description;
 
