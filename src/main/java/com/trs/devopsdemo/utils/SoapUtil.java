@@ -85,7 +85,7 @@ public class SoapUtil {
         map.put("Content-Type", "text/xml");
         try {
             Response response=RequestUtil.sendpostWithSoap("http://localhost:9090/greet?wsdl",map,soap.toString());
-            System.out.println(response.xmlPath().prettyPrint());
+            System.out.println((response.print()));
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
