@@ -14,15 +14,16 @@ import lombok.Data;
 
 @Data
 public class Assertion {
+
     private String name;
     private String value;
-    private String type;
+    private Integer type;//0为等于 1为包含 目前支持0,1
 
-    private String source;
-    private String property;
-    private String comparison;
-    private String targetValue;
-    private char isSuccess;
+    private String source = "json";//默认json 目前只支持json
+    //private String property;
+    //private String comparison;
+    //private String targetValue;
+    private char isSuccess;//1为成功 0为失败
     private String failedReason;
 
 }

@@ -3,6 +3,7 @@ package com.trs.devopsdemo.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.jayway.jsonpath.JsonPath;
+import com.trs.devopsdemo.apitest.AssertionExecutor;
 import com.trs.devopsdemo.apitest.RequestExecutor;
 import com.trs.devopsdemo.domain.api.ApiDTO;
 import com.trs.devopsdemo.domain.api.Form;
@@ -34,8 +35,6 @@ import java.net.MalformedURLException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
-
-import static org.hamcrest.Matchers.equalTo;
 
 /**
  * @Title AutotestController
@@ -352,31 +351,31 @@ public class AutotestController {
         resMap.put("time", response.getTime());
         return new JsonBean(0, "OK", resMap.toString());
     }
-
-    @PostMapping("executeInterface")
-    public JsonBean executeInterface(@RequestBody ApiDTO apiDTO) {
-        RequestExecutor executor = new RequestExecutor(apiDTO);
-        Long t1 = System.currentTimeMillis();
-
-        Response response = executor.executeHttpRequest();//执行
-        log.info("返回的值为{}", response.body().asString());
-        Assertion apiAssertions = apiDTO.getApiAssertions();
-        //断言
-        if (Objects.nonNull(apiAssertions)) {
-            try {
-                if ("等于".equals(apiAssertions.getType())) {
-                    String s = apiAssertions.getName().split("$.")[0];
-                    response.then().body(s, equalTo("你好"));
-                }
-                if ("包含".equals(apiAssertions.getType())) {
-
-                }
-            } catch (AssertionError e) {
-                log.info("==========================={}", "断言失败");
-            }
-        }
-        return new JsonBean(0, "OK", response.asString() + "=======" + (System.currentTimeMillis() - t1));
-    }
+//
+//    @PostMapping("executeInterface")
+//    public JsonBean executeInterface(@RequestBody ApiDTO apiDTO) {
+//        RequestExecutor executor = new RequestExecutor(apiDTO);
+//        Long t1 = System.currentTimeMillis();
+//
+//        Response response = executor.executeHttpRequest();//执行
+//        log.info("返回的值为{}", response.body().asString());
+//        List<Assertion> assertions = apiDTO.getAssertions();
+//        //断言
+//        if (Objects.nonNull(apiAssertions)) {
+//            try {
+//                if ("等于".equals(apiAssertions.getType())) {
+//                    String s = apiAssertions.getName().split("$.")[0];
+//                    response.then().body(s, equalTo("你好"));
+//                }
+//                if ("包含".equals(apiAssertions.getType())) {
+//
+//                }
+//            } catch (AssertionError e) {
+//                log.info("==========================={}", "断言失败");
+//            }
+//        }
+//        return new JsonBean(0, "OK", response.asString() + "=======" + (System.currentTimeMillis() - t1));
+//    }
 
 
     @PostMapping("executeUsecase")
@@ -411,13 +410,13 @@ public class AutotestController {
                             String resBody = AutotestController.reqData.get(uuid);//根据uuid获取
                             String read = JsonPath.parse(resBody).read(jsonPath.replaceAll(uuid + ".", ""));//需要替换的值
                             x.setValue(read);
-                            log.info("接口返回数据{}替换{}",read,jsonPath);
+                            log.info("接口返回数据{}替换{}", read, jsonPath);
                             return x;
                         }
                         return x;
                     }).collect(Collectors.toList());
                 }
-                Assertion assertion = data.getAssertion();
+
                 //处理body数据 判断是否包含接口返回
                 ReqBody body = data.getBody();
                 if (Objects.nonNull(body.getType()) && body.getType() == 0) {
@@ -434,7 +433,7 @@ public class AutotestController {
                             String resBody = AutotestController.reqData.get(uuid);//根据uuid获取
                             String read = JsonPath.parse(resBody).read(jsonPath.replaceAll(uuid + ".", ""));//需要替换的值
                             y.setValue(read);
-                            log.info("接口返回数据{}替换{}",read,jsonPath);
+                            log.info("接口返回数据{}替换{}", read, jsonPath);
                             return y;
                         }
                         return y;
@@ -451,15 +450,24 @@ public class AutotestController {
                 try {
                     Response response = requestExecutor.executeHttpRequest();
                     String resBody = response.asString();
-                    log.info("请求{}执行完毕 响应结果{}", index,resBody);
-
+                    log.info("请求{}执行完毕 响应结果{}", index, resBody);
                     AutotestController.reqData.put(data.getUuid(), resBody);
 
+                        //响应正常 断言
+                        List<Assertion> assertions = data.getAssertion();
+                        if (assertions!=null&&assertions.size()!=0){
+                            //断言执行器
+                            AssertionExecutor assertionExecutor=new AssertionExecutor(data,response);
+                            assertionExecutor.executeHttpAssert();
+                            assertions.forEach(System.out::println);
+                        }
                 } catch (UnsupportedOperationException e) {
 
                 }
 
             });
+
+
         });
 
 

@@ -5,11 +5,7 @@ import com.trs.devopsdemo.domain.model.DevopsAutotestApiGroup;
 import java.util.List;
 
 public interface DevopsAutotestApiGroupMapper {
-
     int deleteByPrimaryKey(Long id);
-
-    int updateGroupStatus(Integer groupId, Long userId);
-
 
     int insert(DevopsAutotestApiGroup record);
 
@@ -21,6 +17,7 @@ public interface DevopsAutotestApiGroupMapper {
 
     int updateByPrimaryKey(DevopsAutotestApiGroup record);
 
-    List<DevopsAutotestApiGroup> selectByUserId(Long userId);
+    Integer updateGroupStatus(Integer groupId, long userId);
 
+    List<DevopsAutotestApiGroup> selectByUserId(Long userId);
 }

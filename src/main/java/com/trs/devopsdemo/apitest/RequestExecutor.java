@@ -21,16 +21,6 @@ public class RequestExecutor {
 
     private RequestSpecification requestSpecification;
 
-//    static {
-//        RestAssured.config = RestAssured.config().httpClient(httpClientConfig().httpClientFactory(
-//                new HttpClientConfig.HttpClientFactory() {
-//                    @Override
-//                    public HttpClient createHttpClient() {
-//                        return new SystemDefaultHttpClient();
-//                    }
-//                }));
-//    }
-
     private static SessionFilter sessionFilter = new SessionFilter();
 
     public RequestExecutor(ApiDTO apiDTO) {
@@ -97,7 +87,7 @@ public class RequestExecutor {
      * @return
      * @description 执行http请求
      */
-    public Response executeHttpRequest() {
+    public Response executeHttpRequest(){
         Response response = null;
         switch (apiDTO.getMethod().toUpperCase()) {
             case "GET":

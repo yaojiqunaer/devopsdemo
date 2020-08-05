@@ -25,6 +25,6 @@ public class ReqData {
     private List<Form> form;//表单Form参数
     private ReqBody body;
     private List<Header> header;
-    private Assertion assertion;
+    private List<Assertion> assertion;
 
 }

@@ -83,7 +83,7 @@ public class HttpTestController {
     @PostMapping("login")
     public JsonBean login(String username, String password, HttpServletRequest request) {
 
-        System.out.println("login:sessionId"+request.getSession().getId());
+       // System.out.println("login:sessionId"+request.getSession().getId());
         if ("admin".equals(username) && "123456".equals(password)) {
             String token = Token.createTokenByUsernamePassword(username, password);
             request.getSession().setAttribute("token", token);
@@ -95,9 +95,10 @@ public class HttpTestController {
 
     @GetMapping("getUsers")
     public JsonBean getUsers(HttpServletRequest request) {
-        System.out.println("getUsers:sessionId"+request.getSession().getId());
-        System.out.println("header:" + request.getHeader("X-User-Token"));
-        System.out.println("session:" + request.getSession().getAttribute("token"));
+//        System.out.println("getUsers:sessionId"+request.getSession().getId());
+//        System.out.println("header:" + request.getHeader("X-User-Token"));
+//        System.out.println("session:" + request.getSession().getAttribute("token"));
+        //int i=1/0;
         if (request.getHeader("X-User-Token").equals(request.getSession().getAttribute("token").toString())) {
             User user1 = new User("张三", "男", 23);
             User user2 = new User("李四", "男", 44);
