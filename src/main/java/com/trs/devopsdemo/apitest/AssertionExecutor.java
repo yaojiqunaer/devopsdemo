@@ -17,7 +17,15 @@ import java.util.concurrent.TimeUnit;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchema;
 import static org.hamcrest.Matchers.*;
 
-
+/**
+ * @Title AssertionExecutor
+ * @Description: 断言执行器
+ * @Create Date: 2020/7/27 18:33
+ * @Author Zhenjin.Zhang
+ * @Contact: zhang.zhenjin@trs.com.cn
+ * @Company: 成都拓尔思信息技术有限公司
+ * @Department: 中台（Middle-End）
+ */
 public class AssertionExecutor {
 
     private ReqData reqData;
@@ -108,6 +116,10 @@ public class AssertionExecutor {
         } catch (AssertionError e) {
             assertion.setIsSuccess('0');
             assertion.setFailedReason(e.toString());
+        }catch (Exception e){
+            //捕获到其他异常
+            assertion.setIsSuccess('0');
+            assertion.setFailedReason("服务器断言执行器异常");//实际可能前端构造断语句出错
         }
     }
 

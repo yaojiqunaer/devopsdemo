@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Random;
 
 /**
  * @Title TestController
@@ -68,12 +70,12 @@ public class HttpTestController {
     }
 
 
-    @PostMapping("addUser")
+    //@PostMapping("addUser")
     public JsonBean addUser(String token) {
         return new JsonBean(0, "OK", JSONObject.parse("\"userId\":\"123\""));
     }
 
-    @GetMapping("delUser")
+    //@GetMapping("delUser")
     public JsonBean delUser(String token, Integer id) {
         return new JsonBean(0, "OK", null);
     }
@@ -83,7 +85,7 @@ public class HttpTestController {
     @PostMapping("login")
     public JsonBean login(String username, String password, HttpServletRequest request) {
 
-       // System.out.println("login:sessionId"+request.getSession().getId());
+        // System.out.println("login:sessionId"+request.getSession().getId());
         if ("admin".equals(username) && "123456".equals(password)) {
             String token = Token.createTokenByUsernamePassword(username, password);
             request.getSession().setAttribute("token", token);
@@ -100,11 +102,11 @@ public class HttpTestController {
 //        System.out.println("session:" + request.getSession().getAttribute("token"));
         //int i=1/0;
         if (request.getHeader("X-User-Token").equals(request.getSession().getAttribute("token").toString())) {
-            User user1 = new User("张三", "男", 23);
-            User user2 = new User("李四", "男", 44);
-            User user3 = new User("王五", "女", 50);
-            User user4 = new User("赵六", "男", 77);
-            User user5 = new User("小七", "女", 18);
+            User user1 = new User(null, "张三", "男", 23);
+            User user2 = new User(null, "李四", "男", 44);
+            User user3 = new User(null, "王五", "女", 50);
+            User user4 = new User(null, "赵六", "男", 77);
+            User user5 = new User(null, "小七", "女", 18);
             List<User> objects = new ArrayList<>();
             objects.add(user1);
             objects.add(user2);
@@ -114,6 +116,41 @@ public class HttpTestController {
             return new JsonBean(0, "OK", objects);
         }
         return new JsonBean(-1, "未登录", null);
+    }
+
+
+    private static List<User> users = new ArrayList<>();
+
+    @PostMapping("addUser")
+    public JsonBean addUser(@RequestBody User user,HttpServletRequest request) {
+       // System.out.println(request.getHeader("X-User-Token"));
+        Long id = new Random().nextLong();
+        user.setId(id);
+        users.add(user);
+        return new JsonBean(0, "OK", new User(user.getId(), null, null, null));
+    }
+
+    @GetMapping("deleteUser")
+    public JsonBean deleteUser(@RequestParam Long id) {
+        User userx=null;
+        for (User user : users) {
+            if (user.getId().longValue() == id.longValue()) {
+                userx = user;
+                break;
+            }
+        }
+        if (Objects.isNull(userx)){
+            return new JsonBean(-1,"删除失败，无此用户",null);
+        }
+        users.remove(userx);
+        return new JsonBean(0,"OK",null);
+    }
+
+    public static void main(String[] args) {
+        Long l1=21534465878970897l;
+        Long l2=21534465878970897l;
+        System.out.println(l1==l2);//对象比较地址 基本比较数值
+        System.out.println(l1.longValue()==l2.longValue());
     }
 
 

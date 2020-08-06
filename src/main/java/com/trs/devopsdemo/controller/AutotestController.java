@@ -9,6 +9,7 @@ import com.trs.devopsdemo.domain.api.ApiDTO;
 import com.trs.devopsdemo.domain.api.Form;
 import com.trs.devopsdemo.domain.api.Header;
 import com.trs.devopsdemo.domain.api.Query;
+import com.trs.devopsdemo.domain.dto.ApiGroupDto;
 import com.trs.devopsdemo.domain.model.DevopsAutotestApiGroup;
 import com.trs.devopsdemo.domain.page.Page;
 import com.trs.devopsdemo.domain.usecase.Assertion;
@@ -69,20 +70,19 @@ public class AutotestController {
      * @description 新增接口分组
      */
     @PostMapping("apiManagement/createGroup")
-    public BaseResult createApiGroup(@RequestBody DevopsAutotestApiGroup group) {
-        log.info("新增接口分组：{}", JSONObject.toJSON(group).toString());
-        return devopsAutotestApiManagementService.insertApiGroup(group, SessionLocal.getUser());
+    public BaseResult createApiGroup(@RequestBody ApiGroupDto group) {
+        //
+        return BaseResult.success();
     }
 
     /**
-     * @param id 接口分组ID
+     * @param groupId 接口分组ID
      * @return
      * @description 删除接口分组
      */
     @GetMapping("apiManagement/deleteGroup")
-    public BaseResult deleteApiGroup(@RequestParam(required = true) Integer id) {
-        log.info("删除接口分组：{}", id);
-        return devopsAutotestApiManagementService.deleteApiGroupByGroupId(id, SessionLocal.getUser());
+    public BaseResult deleteApiGroup(@RequestParam Integer groupId) {
+        return BaseResult.success();
     }
 
 
@@ -94,7 +94,7 @@ public class AutotestController {
     @GetMapping("apiManagement/selectGroups")
     public BaseResult selectGroups(String keyWord) {
         log.info("查询接口分组：{}", "");
-        return devopsAutotestApiManagementService.selectGroupsByUserId(1L);
+        return null;
     }
 
     /**
@@ -388,18 +388,22 @@ public class AutotestController {
             reqData.forEach(data -> {
                 index.getAndIncrement();
                 //处理query数据 判断是否包含接口返回
-                List<Query> query = data.getQuery();
-//                if (query.size() != 0) {
-//                    //含query
-//                    query = query.stream().map(x -> {
-//                        if (x.getType() == 1) {
-//                            //处理接口返回
-//                            return x;
-//                        }
-//                        return x;
-//                    }).collect(Collectors.toList());
-//                }
-
+                List<Query> querys = data.getQuery();
+                if (Objects.nonNull(querys) && querys.size() != 0) {
+                    querys = querys.stream().map(x -> {
+                        if (x.getType() == 1) {//处理接口返回数据 暂时从static中获取
+                            String jsonPath = x.getValue();//例：$.uuid.data.token
+                            String uuid = jsonPath.split("\\.")[1];
+                            String resBody = AutotestController.reqData.get(uuid);//根据uuid获取
+                            String read = Objects.toString(JsonPath.parse(resBody).read(jsonPath.replaceAll(uuid + ".", "")));//需要替换的值
+                            // com.jayway.jsonpath.PathNotFoundException: Missing property in path $['data']
+                            x.setValue(read);
+                            log.info("接口返回数据{}替换{}", read, jsonPath);
+                            return x;
+                        }
+                        return x;
+                    }).collect(Collectors.toList());
+                }
                 //处理header数据 判断是否包含接口返回
                 List<Header> headers = data.getHeader();
                 if (Objects.nonNull(headers) && headers.size() != 0) {
@@ -440,7 +444,7 @@ public class AutotestController {
                     }).collect(Collectors.toList());
                 }
 
-                apiDTO.setReqQuery(query);
+                apiDTO.setReqQuery(querys);
                 apiDTO.setReqBody(body.getValue());
                 apiDTO.setReqHeaders(headers);
                 apiDTO.setReqForm(forms);
@@ -453,14 +457,14 @@ public class AutotestController {
                     log.info("请求{}执行完毕 响应结果{}", index, resBody);
                     AutotestController.reqData.put(data.getUuid(), resBody);
 
-                        //响应正常 断言
-                        List<Assertion> assertions = data.getAssertion();
-                        if (assertions!=null&&assertions.size()!=0){
-                            //断言执行器
-                            AssertionExecutor assertionExecutor=new AssertionExecutor(data,response);
-                            assertionExecutor.executeHttpAssert();
-                            assertions.forEach(System.out::println);
-                        }
+                    //响应正常 断言
+                    List<Assertion> assertions = data.getAssertion();
+                    if (assertions != null && assertions.size() != 0) {
+                        //断言执行器
+                        AssertionExecutor assertionExecutor = new AssertionExecutor(data, response);
+                        assertionExecutor.executeHttpAssert();
+                        assertions.forEach(System.out::println);
+                    }
                 } catch (UnsupportedOperationException e) {
 
                 }
@@ -481,27 +485,17 @@ public class AutotestController {
 
     private ApiDTO getApiDTOById(Long id) {
         ApiDTO apiDTO = new ApiDTO();
+        ArrayList<Form> form = new ArrayList<>();
+        List<Header> headers = new ArrayList<>();
+        List<Query> queries = new ArrayList<>();
         if (id == 3) {
             //模拟查询到id为3的接口信息 login接口
             apiDTO.setApiId(id);
             apiDTO.setMethod("POST");
             apiDTO.setName("登录接口");
             apiDTO.setPath("http://localhost:8080/devops/test/login");
-            ArrayList<Form> form = new ArrayList<>();
-            Form form1 = new Form();
-            form1.setName("username");
-            form1.setExample("zs");
-            Form form2 = new Form();
-            form2.setName("password");
-            form2.setExample("123");
-            form.add(form1);
-            form.add(form2);
-            apiDTO.setReqForm(form);
             apiDTO.setReqBodyType("form");
-            List<Header> headers = new ArrayList<>();
-            List<Query> queries = new ArrayList<>();
-            apiDTO.setReqHeaders(headers);
-            apiDTO.setReqQuery(queries);
+
         }
         if (id == 7) {
             //模拟查询到id为7的接口信息 查询用户接口
@@ -509,14 +503,23 @@ public class AutotestController {
             apiDTO.setMethod("GET");
             apiDTO.setName("查询用户信息");
             apiDTO.setPath("http://localhost:8080/devops/test/getUsers");
-            ArrayList<Form> form = new ArrayList<>();
-            List<Header> headers = new ArrayList<>();
-            Query query = new Query();
-            List<Query> queries = new ArrayList<>();
-            apiDTO.setReqForm(form);
-            apiDTO.setReqHeaders(headers);
-            apiDTO.setReqQuery(queries);
             apiDTO.setResBody("");
+        }
+
+        if (id == 10) {
+            //模拟查询到id为10的接口信息 添加用户接口
+            apiDTO.setApiId(id);
+            apiDTO.setMethod("POST");
+            apiDTO.setName("添加用户信息");
+            apiDTO.setPath("http://localhost:8080/devops/test/addUser");
+            apiDTO.setReqBodyType("json");
+        }
+        if (id == 15) {
+            //模拟查询到id为15的接口信息 删除用户接口
+            apiDTO.setApiId(id);
+            apiDTO.setMethod("GET");
+            apiDTO.setName("删除用户信息");
+            apiDTO.setPath("http://localhost:8080/devops/test/deleteUser");
         }
         return apiDTO;
     }

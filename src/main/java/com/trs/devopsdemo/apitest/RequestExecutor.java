@@ -13,7 +13,15 @@ import static io.restassured.config.JsonConfig.jsonConfig;
 import static io.restassured.config.SSLConfig.sslConfig;
 import static io.restassured.path.json.config.JsonPathConfig.NumberReturnType.BIG_DECIMAL;
 
-
+/**
+ * @Title RequestExecutor
+ * @Description: 请求执行器
+ * @Create Date: 2020/7/25 14:42
+ * @Author Zhenjin.Zhang
+ * @Contact: zhang.zhenjin@trs.com.cn
+ * @Company: 成都拓尔思信息技术有限公司
+ * @Department: 中台（Middle-End）
+ */
 @Slf4j
 public class RequestExecutor {
 
@@ -79,7 +87,8 @@ public class RequestExecutor {
     }
 
     private void applyRawParam() {
-        requestSpecification = requestSpecification.body(apiDTO.getReqBody());
+        requestSpecification = requestSpecification.body(apiDTO.getReqBody()).header(new Header("Content-Type",
+                "application/json"));
     }
 
     /**
@@ -87,7 +96,7 @@ public class RequestExecutor {
      * @return
      * @description 执行http请求
      */
-    public Response executeHttpRequest(){
+    public Response executeHttpRequest() {
         Response response = null;
         switch (apiDTO.getMethod().toUpperCase()) {
             case "GET":
