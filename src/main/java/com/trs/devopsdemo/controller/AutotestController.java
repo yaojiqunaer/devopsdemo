@@ -34,6 +34,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
@@ -380,7 +383,51 @@ public class AutotestController {
 
     @PostMapping("executeUsecase")
     public JsonBean executeUsecase(@RequestBody UsecaseDTO usecaseDTO) {
+        long l1 = System.currentTimeMillis();
+        excuteUsecase(usecaseDTO);
+        return new JsonBean(0, "OK", System.currentTimeMillis() - l1);
 
+    }
+
+    /**
+     * @param usecases
+     * @return
+     * @description 多线程运行用例集
+     */
+    @PostMapping("runCollectionWithThread")
+    public JsonBean runCollectionWithThread(@RequestBody List<UsecaseDTO> usecases) {//模拟执行一个集合20个用例
+        long l1 = System.currentTimeMillis();
+        AtomicInteger index = new AtomicInteger(1);
+        ExecutorService executorService = Executors.newFixedThreadPool(10);//定长线程池
+        usecases.stream().forEach(usecase -> {//五个线程
+            executorService.execute(() -> {
+                excuteUsecase(usecase);
+                log.info("当前线程名{},线程id{},用例{}执行完毕", Thread.currentThread().getName(), Thread.currentThread().getId(),
+                        index.getAndIncrement());
+            });
+        });
+        executorService.shutdown();//停止接受新任务 原来的线程继续
+        try {
+            executorService.awaitTermination(5, TimeUnit.MINUTES);//线程终止或者到了5分钟计算时长
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return new JsonBean(0, "OK", System.currentTimeMillis() - l1);
+    }
+
+    /**
+     * @param usecases
+     * @return
+     * @description 同步运行用例集
+     */
+    @PostMapping("runCollectionWithSyn")
+    public JsonBean runCollectionWithSyn(@RequestBody List<UsecaseDTO> usecases) {
+        long l1 = System.currentTimeMillis();
+        usecases.forEach(this::excuteUsecase);
+        return new JsonBean(0, "OK", System.currentTimeMillis()-l1);
+    }
+
+    private void excuteUsecase(UsecaseDTO usecaseDTO) {
         AtomicInteger index = new AtomicInteger(0);//自增索引
         usecaseDTO.getRequests().forEach(request -> {
             ApiDTO apiDTO = getApiDTOById(request.getApiId());//接口信息
@@ -395,7 +442,8 @@ public class AutotestController {
                             String jsonPath = x.getValue();//例：$.uuid.data.token
                             String uuid = jsonPath.split("\\.")[1];
                             String resBody = AutotestController.reqData.get(uuid);//根据uuid获取
-                            String read = Objects.toString(JsonPath.parse(resBody).read(jsonPath.replaceAll(uuid + ".", "")));//需要替换的值
+                            String read = Objects.toString(JsonPath.parse(resBody).read(jsonPath.replaceAll(uuid +
+                                    ".", "")));//需要替换的值
                             // com.jayway.jsonpath.PathNotFoundException: Missing property in path $['data']
                             x.setValue(read);
                             log.info("接口返回数据{}替换{}", read, jsonPath);
@@ -463,7 +511,7 @@ public class AutotestController {
                         //断言执行器
                         AssertionExecutor assertionExecutor = new AssertionExecutor(data, response);
                         assertionExecutor.executeHttpAssert();
-                        assertions.forEach(System.out::println);
+                        assertions.forEach(x->{log.info("断言结果{}====请求参数{},",x.getIsSuccess());});
                     }
                 } catch (UnsupportedOperationException e) {
 
@@ -471,16 +519,11 @@ public class AutotestController {
 
             });
 
-
         });
-
-
-        return new JsonBean(0, "OK", null);
-
     }
 
 
-    private static Map<String, String> reqData = new HashMap();
+    private static Map<String, String> reqData = Collections.synchronizedMap(new HashMap<>());
 
 
     private ApiDTO getApiDTOById(Long id) {

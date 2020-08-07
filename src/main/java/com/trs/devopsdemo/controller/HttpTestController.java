@@ -9,10 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
 
 /**
  * @Title TestController
@@ -119,11 +116,11 @@ public class HttpTestController {
     }
 
 
-    private static List<User> users = new ArrayList<>();
+    private static List<User> users = Collections.synchronizedList(new ArrayList<>());
 
     @PostMapping("addUser")
-    public JsonBean addUser(@RequestBody User user,HttpServletRequest request) {
-       // System.out.println(request.getHeader("X-User-Token"));
+    public JsonBean addUser(@RequestBody User user, HttpServletRequest request) {
+        // System.out.println(request.getHeader("X-User-Token"));
         Long id = new Random().nextLong();
         user.setId(id);
         users.add(user);
@@ -132,25 +129,25 @@ public class HttpTestController {
 
     @GetMapping("deleteUser")
     public JsonBean deleteUser(@RequestParam Long id) {
-        User userx=null;
+        User userx = null;
         for (User user : users) {
             if (user.getId().longValue() == id.longValue()) {
                 userx = user;
                 break;
             }
         }
-        if (Objects.isNull(userx)){
-            return new JsonBean(-1,"删除失败，无此用户",null);
+        if (Objects.isNull(userx)) {
+            return new JsonBean(-1, "删除失败，无此用户", null);
         }
         users.remove(userx);
-        return new JsonBean(0,"OK",null);
+        return new JsonBean(0, "OK", null);
     }
 
     public static void main(String[] args) {
-        Long l1=21534465878970897l;
-        Long l2=21534465878970897l;
-        System.out.println(l1==l2);//对象比较地址 基本比较数值
-        System.out.println(l1.longValue()==l2.longValue());
+        Long l1 = 21534465878970897l;
+        Long l2 = 21534465878970897l;
+        System.out.println(l1 == l2);//对象比较地址 基本比较数值
+        System.out.println(l1.longValue() == l2.longValue());
     }
 
 
