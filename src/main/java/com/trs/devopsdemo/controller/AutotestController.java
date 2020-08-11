@@ -398,7 +398,7 @@ public class AutotestController {
     public JsonBean runCollectionWithThread(@RequestBody List<UsecaseDTO> usecases) {//模拟执行一个集合20个用例
         long l1 = System.currentTimeMillis();
         AtomicInteger index = new AtomicInteger(1);
-        ExecutorService executorService = Executors.newFixedThreadPool(10);//定长线程池
+        ExecutorService executorService = Executors.newFixedThreadPool(5);//定长线程池
         usecases.stream().forEach(usecase -> {//五个线程
             executorService.execute(() -> {
                 excuteUsecase(usecase);
@@ -428,6 +428,7 @@ public class AutotestController {
     }
 
     private void excuteUsecase(UsecaseDTO usecaseDTO) {
+        Map<String, String> reqDataCache = Collections.synchronizedMap(new HashMap<>());
         AtomicInteger index = new AtomicInteger(0);//自增索引
         usecaseDTO.getRequests().forEach(request -> {
             ApiDTO apiDTO = getApiDTOById(request.getApiId());//接口信息
@@ -441,7 +442,7 @@ public class AutotestController {
                         if (x.getType() == 1) {//处理接口返回数据 暂时从static中获取
                             String jsonPath = x.getValue();//例：$.uuid.data.token
                             String uuid = jsonPath.split("\\.")[1];
-                            String resBody = AutotestController.reqData.get(uuid);//根据uuid获取
+                            String resBody = reqDataCache.get(uuid);//根据uuid获取
                             String read = Objects.toString(JsonPath.parse(resBody).read(jsonPath.replaceAll(uuid +
                                     ".", "")));//需要替换的值
                             // com.jayway.jsonpath.PathNotFoundException: Missing property in path $['data']
@@ -459,7 +460,7 @@ public class AutotestController {
                         if (x.getType() == 1) {//处理接口返回数据 暂时从static中获取
                             String jsonPath = x.getValue();//例：$.uuid.data.token
                             String uuid = jsonPath.split("\\.")[1];
-                            String resBody = AutotestController.reqData.get(uuid);//根据uuid获取
+                            String resBody = reqDataCache.get(uuid);//根据uuid获取
                             String read = JsonPath.parse(resBody).read(jsonPath.replaceAll(uuid + ".", ""));//需要替换的值
                             x.setValue(read);
                             log.info("接口返回数据{}替换{}", read, jsonPath);
@@ -482,7 +483,7 @@ public class AutotestController {
                         if (y.getType() == 1) {//处理接口返回数据 暂时从static中获取
                             String jsonPath = y.getValue();//例：$.uuid.data.token
                             String uuid = jsonPath.split("\\.")[1];
-                            String resBody = AutotestController.reqData.get(uuid);//根据uuid获取
+                            String resBody = reqDataCache.get(uuid);//根据uuid获取
                             String read = JsonPath.parse(resBody).read(jsonPath.replaceAll(uuid + ".", ""));//需要替换的值
                             y.setValue(read);
                             log.info("接口返回数据{}替换{}", read, jsonPath);
@@ -503,7 +504,7 @@ public class AutotestController {
                     Response response = requestExecutor.executeHttpRequest();
                     String resBody = response.asString();
                     log.info("请求{}执行完毕 响应结果{}", index, resBody);
-                    AutotestController.reqData.put(data.getUuid(), resBody);
+                    reqDataCache.put(data.getUuid(), resBody);
 
                     //响应正常 断言
                     List<Assertion> assertions = data.getAssertion();
@@ -511,7 +512,15 @@ public class AutotestController {
                         //断言执行器
                         AssertionExecutor assertionExecutor = new AssertionExecutor(data, response);
                         assertionExecutor.executeHttpAssert();
-                        assertions.forEach(x->{log.info("断言结果{}====请求参数{},",x.getIsSuccess());});
+                        assertions.forEach(x->{
+                            if (x.getIsSuccess()=='1'){
+                                //成功
+                                log.info("断言结果{}===={},","成功",x.getName());
+                            }else {
+                                log.info("断言结果{}===={},","失败",x.getFailedReason());
+                            }
+
+                        });
                     }
                 } catch (UnsupportedOperationException e) {
 
@@ -523,7 +532,7 @@ public class AutotestController {
     }
 
 
-    private static Map<String, String> reqData = Collections.synchronizedMap(new HashMap<>());
+    //private static Map<String, String> reqDataCache = Collections.synchronizedMap(new HashMap<>());
 
 
     private ApiDTO getApiDTOById(Long id) {

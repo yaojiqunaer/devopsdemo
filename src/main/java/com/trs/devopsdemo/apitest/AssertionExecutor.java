@@ -120,6 +120,7 @@ public class AssertionExecutor {
             //捕获到其他异常
             assertion.setIsSuccess('0');
             assertion.setFailedReason("服务器断言执行器异常");//实际可能前端构造断语句出错
+            System.out.println(res.asString());
         }
     }
 

@@ -23,7 +23,7 @@ public class Token {
 
     public static String createTokenByUsernamePassword(String username, String password) {
 
-        return System.currentTimeMillis() + username + password;
+        return username + password;
 
     }
 
