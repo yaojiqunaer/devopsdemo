@@ -5,6 +5,7 @@ import com.trs.devopsdemo.domain.DTO;
 import com.trs.devopsdemo.domain.dto.Token;
 import com.trs.devopsdemo.domain.dto.User;
 import com.trs.devopsdemo.entity.JsonBean;
+import com.trs.midend.result.BaseResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -141,6 +142,11 @@ public class HttpTestController {
         }
         users.remove(userx);
         return new JsonBean(0, "OK", null);
+    }
+
+    @GetMapping("getBase")
+    public BaseResult getBase(){
+        return BaseResult.success();
     }
 
     public static void main(String[] args) {

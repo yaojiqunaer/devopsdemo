@@ -20,6 +20,7 @@ import com.trs.devopsdemo.entity.JsonBean;
 import com.trs.devopsdemo.filter.SessionLocal;
 import com.trs.devopsdemo.service.DevopsAutotestApiManagementService;
 import com.trs.devopsdemo.service.InterfaceService;
+import com.trs.devopsdemo.test.TestSeesion;
 import com.trs.devopsdemo.utils.FileUtil;
 import com.trs.devopsdemo.utils.RequestUtil;
 import com.trs.midend.result.BaseResult;
@@ -240,6 +241,10 @@ public class AutotestController {
         return null;
     }
 
+    @PostMapping("pppp")
+    public void getsss(){
+        TestSeesion.get();
+    }
 
     /**
      * @param ids
@@ -438,6 +443,7 @@ public class AutotestController {
                 //处理query数据 判断是否包含接口返回
                 List<Query> querys = data.getQuery();
                 if (Objects.nonNull(querys) && querys.size() != 0) {
+                    //CollectionUtils.isEmpty()
                     querys = querys.stream().map(x -> {
                         if (x.getType() == 1) {//处理接口返回数据 暂时从static中获取
                             String jsonPath = x.getValue();//例：$.uuid.data.token
@@ -572,6 +578,13 @@ public class AutotestController {
             apiDTO.setMethod("GET");
             apiDTO.setName("删除用户信息");
             apiDTO.setPath("http://localhost:8080/devops/test/deleteUser");
+        }
+        if(id==16){
+            apiDTO.setApiId(id);
+            apiDTO.setMethod("POST");
+            apiDTO.setName("网关登录");
+            apiDTO.setReqBodyType("json");
+            apiDTO.setPath("http://apolloweb.devdemo.trs.net.cn/apollo/user/login");
         }
         return apiDTO;
     }

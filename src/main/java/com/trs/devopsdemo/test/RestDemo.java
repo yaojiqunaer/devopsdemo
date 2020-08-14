@@ -1,13 +1,12 @@
 package com.trs.devopsdemo.test;
 
-import io.restassured.RestAssured;
+import io.restassured.http.Header;
 import io.restassured.response.Response;
-import org.junit.Test;
+import io.restassured.specification.RequestSpecification;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.net.MalformedURLException;
 
-import static io.restassured.path.json.JsonPath.from;
+import static io.restassured.RestAssured.given;
 
 /**
  * @Title RestDemo
@@ -20,32 +19,33 @@ import static io.restassured.path.json.JsonPath.from;
  */
 public class RestDemo {
 
-    @Test
-    public void test(){
 
-        Map form=new HashMap<>();
-        form.put("username","admin");
-        form.put("password","1907836146");
-        Map headers=new HashMap();
-        headers.put("X-User-Token","xxxx");
-        headers.put("Content-Type","application/json");
-        Map body=new HashMap();
+    public static void main(String[] args) {
+        //TestSeesion.get();
+    }
 
-        Response response = RestAssured
-                .given()
-                .headers(headers)
-                .body("{\n" +
-                "    \"groupName\":\"阿波罗devops测试环境\",\n" +
-                "    \"basepath\":\"127.0.0.1/gov\"\n" +
-                "}")
-                .post("http://localhost:8080/devops/autotest/apiManagement/createGroup")
-                .then()
-                .contentType("application/json")
-                .extract()
-                .response();
+    //@Test
+    public void test() throws MalformedURLException {
 
-        System.out.println((String) from(response.asString()).get("resultCode.code"));
-        System.out.println("================"+response.getBody().asString());
+//        Response response =
+//                given()
+//                .contentType("application/json")
+//                .body("{\"tel\":\"MTM4ODg4ODg4ODM=\",\"password\":\"dHJzYWRtaW4xMjM=\",\"random\":27469}")
+//                .when().post("http://apolloweb.devdemo.trs.net.cn/apollo/user/login");
+
+        //System.out.println((String) from(response.asString()).get("resultCode.code"));
+        //System.out.println("================"+response.getBody().asString());
+        RequestSpecification requestSpecification=given();
+        Header header = new Header("Content-Type","application/json");
+
+        Response response = requestSpecification.body("{\\\"tel\\\":\\\"MTM4ODg4ODg4ODM=\\\"," +
+                "\\\"password\\\":\\\"dHJzYWRtaW4xMjM=\\\"," +
+                "\\\"random\\\":27469}").
+                header(header).
+                when().
+                post("http://apolloweb.devdemo.trs.net.cn/apollo/user/login");
+
+        System.out.println(response.time());
 
     }
 
