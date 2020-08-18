@@ -9,6 +9,8 @@ import com.trs.devopsdemo.domain.api.ApiDTO;
 import com.trs.devopsdemo.domain.api.Form;
 import com.trs.devopsdemo.domain.api.Header;
 import com.trs.devopsdemo.domain.api.Query;
+import com.trs.devopsdemo.domain.bo.JsonNodeParser;
+import com.trs.devopsdemo.domain.bo.ResBodyField;
 import com.trs.devopsdemo.domain.dto.ApiGroupDto;
 import com.trs.devopsdemo.domain.model.DevopsAutotestApiGroup;
 import com.trs.devopsdemo.domain.page.Page;
@@ -210,18 +212,16 @@ public class AutotestController {
 
 
     @PostMapping("case/parseResponseTest")
-    public BaseResult parseResponseTest(@RequestBody String apiDTO){
+    public BaseResult parseResponseTest(@RequestBody String apiDTO) {
         System.out.println(apiDTO);
         JSONObject jsonObject = JSONObject.parseObject(apiDTO);
-        String resBody = jsonObject.getString("resBody");
-        System.out.println(resBody);
-        Object parse = JSON.parse(resBody);
-        List list=new ArrayList();
-        ApiDTO a1=new ApiDTO();
-        //a1.setReqBody(resBody);
-        list.add(parse);
-        return BaseResult.success(list);
+        JSONObject resBody = jsonObject.getJSONObject("resBody");
+        List<ResBodyField> fields = new ArrayList<>();
+        fields = JsonNodeParser.parser(resBody, fields);
+
+        return BaseResult.success(fields);
     }
+
 
     /**
      * @param usecaseSetId
@@ -256,7 +256,7 @@ public class AutotestController {
     }
 
     @PostMapping("pppp")
-    public void getsss(){
+    public void getsss() {
         TestSeesion.get();
     }
 
@@ -443,7 +443,7 @@ public class AutotestController {
     public JsonBean runCollectionWithSyn(@RequestBody List<UsecaseDTO> usecases) {
         long l1 = System.currentTimeMillis();
         usecases.forEach(this::excuteUsecase);
-        return new JsonBean(0, "OK", System.currentTimeMillis()-l1);
+        return new JsonBean(0, "OK", System.currentTimeMillis() - l1);
     }
 
     private void excuteUsecase(UsecaseDTO usecaseDTO) {
@@ -532,12 +532,12 @@ public class AutotestController {
                         //断言执行器
                         AssertionExecutor assertionExecutor = new AssertionExecutor(data, response);
                         assertionExecutor.executeHttpAssert();
-                        assertions.forEach(x->{
-                            if (x.getIsSuccess()=='1'){
+                        assertions.forEach(x -> {
+                            if (x.getIsSuccess() == '1') {
                                 //成功
-                                log.info("断言结果{}===={},","成功",x.getName());
-                            }else {
-                                log.info("断言结果{}===={},","失败",x.getFailedReason());
+                                log.info("断言结果{}===={},", "成功", x.getName());
+                            } else {
+                                log.info("断言结果{}===={},", "失败", x.getFailedReason());
                             }
 
                         });
@@ -593,7 +593,7 @@ public class AutotestController {
             apiDTO.setName("删除用户信息");
             apiDTO.setPath("http://localhost:8080/devops/test/deleteUser");
         }
-        if(id==16){
+        if (id == 16) {
             apiDTO.setApiId(id);
             apiDTO.setMethod("POST");
             apiDTO.setName("网关登录");
