@@ -209,6 +209,20 @@ public class AutotestController {
     }
 
 
+    @PostMapping("case/parseResponseTest")
+    public BaseResult parseResponseTest(@RequestBody String apiDTO){
+        System.out.println(apiDTO);
+        JSONObject jsonObject = JSONObject.parseObject(apiDTO);
+        String resBody = jsonObject.getString("resBody");
+        System.out.println(resBody);
+        Object parse = JSON.parse(resBody);
+        List list=new ArrayList();
+        ApiDTO a1=new ApiDTO();
+        //a1.setReqBody(resBody);
+        list.add(parse);
+        return BaseResult.success(list);
+    }
+
     /**
      * @param usecaseSetId
      * @return

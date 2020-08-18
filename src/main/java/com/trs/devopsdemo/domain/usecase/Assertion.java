@@ -1,6 +1,8 @@
 package com.trs.devopsdemo.domain.usecase;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @Title Assertion
@@ -13,10 +15,12 @@ import lombok.Data;
  */
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Assertion {
 
-    private String name;
-    private String value;
+    private String name;//断言jsonpath
+    private String value;//断言值
     private Integer type;//0为等于 1为包含 目前支持0,1
 
     private String source = "json";//默认json 目前只支持json

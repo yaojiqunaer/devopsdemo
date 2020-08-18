@@ -39,10 +39,10 @@ public class AssertionExecutor {
 
     }
 
-    //Integer.parseInt
+    //Integer.parseInt 返回正则
     public Matcher assertionType(Assertion assertion) {
         switch (assertion.getType()) {
-            case 0://equals
+            case 0://equals等于的断言
                 return Matchers.equalTo(assertion.getValue());
             case 1://contains
                 return Matchers.containsString(assertion.getValue());
@@ -111,7 +111,7 @@ public class AssertionExecutor {
 
     private void processJsonBody(Assertion assertion) {
         try {
-            validatableResponse.body(assertion.getName(), assertionType(assertion));
+            validatableResponse.body(assertion.getName(), assertionType(assertion));//
             assertion.setIsSuccess('1');
         } catch (AssertionError e) {
             assertion.setIsSuccess('0');
@@ -157,13 +157,15 @@ public class AssertionExecutor {
                 });
     }
 
-//    public static void main(String args[]){
-//        Assertion assertion = new Assertion("xx","Status code","","equals","200");
-//        try {
-//           // assertThat(20, assertionType(assertion));
-//        }catch (AssertionError e){
-//
-//            System.out.println(e.toString());
-//        }
-//    }
+    public static void main(String args[]){
+
+        //username=zhangsan的断言
+        Assertion assertion = new Assertion("data.user[0].username","zhangsan",0,"",'1',"");
+        try {
+           // assertThat(20, assertionType(assertion));
+        }catch (AssertionError e){
+
+            System.out.println(e.toString());
+        }
+    }
 }
